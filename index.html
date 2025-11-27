@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Scientist Portfolio - Galaxy Theme</title>
+    <title>Data Scientist Portfolio - Permanent Storage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <!-- Galaxy Background -->
     <div class="stars" id="stars"></div>
 
     <button class="menu-toggle" id="menuToggle">
@@ -22,7 +21,7 @@
                 <div class="profile-img" id="profileImage">
                     <i class="fas fa-user"></i>
                 </div>
-                <h2 class="profile-name" id="profileName">Alex Johnson</h2>
+                <h2 class="profile-name" id="profileName">Loading...</h2>
                 <p class="profile-title" id="profileTitle">Data Scientist & Analyst</p>
             </div>
 
@@ -54,8 +53,8 @@
             <section id="home" class="section active">
                 <div class="home-section" id="homeSection">
                     <div class="intro-content">
-                        <h1 id="introTitle">Data Scientist & Analyst</h1>
-                        <p id="introDescription">Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization to drive business decisions.</p>
+                        <h1 id="introTitle">Loading...</h1>
+                        <p id="introDescription">Please wait while we load your portfolio...</p>
                         <a href="#projects" class="btn">View My Work</a>
                     </div>
                 </div>
@@ -67,11 +66,10 @@
                 <div class="about-content">
                     <div class="about-text">
                         <h3>Professional Data Scientist</h3>
-                        <p id="aboutDescription">With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets. My expertise includes machine learning, statistical modeling, data visualization, and predictive analytics.</p>
-                        <p>I have worked with various industries including finance, healthcare, and e-commerce, helping organizations make data-driven decisions that improve efficiency and drive growth.</p>
+                        <p id="aboutDescription">Loading...</p>
                     </div>
                     <div class="personal-info" id="personalInfo">
-                        <!-- Personal info loaded dynamically -->
+                        <!-- Loaded dynamically -->
                     </div>
                 </div>
             </section>
@@ -80,7 +78,7 @@
             <section id="projects" class="section">
                 <h2>My Projects</h2>
                 <div class="projects-grid" id="projectsGrid">
-                    <!-- Projects loaded dynamically -->
+                    <div class="loading">Loading projects...</div>
                 </div>
             </section>
 
@@ -88,7 +86,7 @@
             <section id="certifications" class="section">
                 <h2>Certifications</h2>
                 <div class="certifications-grid" id="certificationsGrid">
-                    <!-- Certifications loaded dynamically -->
+                    <div class="loading">Loading certifications...</div>
                 </div>
             </section>
 
@@ -98,16 +96,16 @@
                 <div class="about-content">
                     <div id="educationSection">
                         <h3>Education</h3>
-                        <!-- Education loaded dynamically -->
+                        <div class="loading">Loading education...</div>
                     </div>
                     <div id="experienceSection">
                         <h3>Experience</h3>
-                        <!-- Experience loaded dynamically -->
+                        <div class="loading">Loading experience...</div>
                     </div>
                 </div>
                 <div id="skillsSection" style="margin-top: 2rem;">
                     <h3>Skills</h3>
-                    <!-- Skills loaded dynamically -->
+                    <div class="loading">Loading skills...</div>
                 </div>
                 <div style="margin-top: 2rem; text-align: center;">
                     <a href="#" class="btn" id="resumeDownloadLink"><i class="fas fa-download"></i> Download Resume</a>
@@ -118,7 +116,7 @@
             <section id="services" class="section">
                 <h2>My Services</h2>
                 <div class="services-grid" id="servicesGrid">
-                    <!-- Services loaded dynamically -->
+                    <div class="loading">Loading services...</div>
                 </div>
             </section>
 
@@ -142,7 +140,7 @@
                     </div>
 
                     <div class="reviews-list" id="reviewsList">
-                        <!-- Reviews loaded dynamically -->
+                        <div class="loading">Loading reviews...</div>
                     </div>
                 </div>
             </section>
@@ -151,7 +149,7 @@
             <section id="blogs" class="section">
                 <h2>My Blogs</h2>
                 <div class="blogs-grid" id="blogsGrid">
-                    <!-- Blogs loaded dynamically -->
+                    <div class="loading">Loading blogs...</div>
                 </div>
             </section>
 
@@ -160,7 +158,7 @@
                 <h2>Contact Me</h2>
                 <div class="contact-container">
                     <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> Email: alex.johnson@example.com</p>
+                        <p id="contactEmail"><i class="fas fa-envelope"></i> Email: Loading...</p>
                         <p>Feel free to reach out for collaborations or just a friendly hello!</p>
                     </div>
                     <div class="contact-form">
@@ -170,8 +168,8 @@
                                 <input type="text" id="contactName" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="contactEmail">Your Email</label>
-                                <input type="email" id="contactEmail" class="form-control" required>
+                                <label for="contactEmailInput">Your Email</label>
+                                <input type="email" id="contactEmailInput" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="contactSubject">Subject</label>
@@ -191,7 +189,6 @@
             <section id="admin" class="section">
                 <h2>Admin Panel</h2>
                 
-                <!-- Admin Login -->
                 <div class="admin-login" id="adminLogin">
                     <h3>Admin Access</h3>
                     <p>Enter password to access admin panel</p>
@@ -201,7 +198,6 @@
                     <button class="btn" id="loginBtn">Login</button>
                 </div>
 
-                <!-- Admin Panel (Hidden by default) -->
                 <div class="admin-panel" id="adminPanel" style="display: none;">
                     <div class="admin-tabs">
                         <div class="admin-tab active" data-tab="profile">Profile</div>
@@ -210,7 +206,7 @@
                         <div class="admin-tab" data-tab="resume">Resume</div>
                         <div class="admin-tab" data-tab="services">Services</div>
                         <div class="admin-tab" data-tab="blogs">Blogs</div>
-                        <div class="admin-tab" data-tab="reviews">Reviews</div>
+                        <div class="admin-tab" data-tab="github">GitHub Sync</div>
                     </div>
 
                     <!-- Profile Admin -->
@@ -245,8 +241,17 @@
                                 <label for="adminAboutDescription">About Description</label>
                                 <textarea id="adminAboutDescription" class="form-control" required></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="adminContactEmail">Contact Email</label>
+                                <input type="email" id="adminContactEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminResumeLink">Resume Download Link</label>
+                                <input type="text" id="adminResumeLink" class="form-control" required>
+                            </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Update Profile</button>
+                                <button type="button" class="btn" id="saveProfileToGitHub">Save to GitHub</button>
                             </div>
                         </form>
                     </div>
@@ -264,7 +269,11 @@
                                 <textarea id="projectDescription" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="projectIcon">Icon (FontAwesome class)</label>
+                                <label for="projectImage">Image URL</label>
+                                <input type="text" id="projectImage" class="form-control" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label for="projectIcon">Icon (if no image)</label>
                                 <input type="text" id="projectIcon" class="form-control" value="fas fa-chart-line" required>
                             </div>
                             <div class="form-group">
@@ -277,12 +286,10 @@
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Add Project</button>
-                                <button type="button" class="btn" id="loadSampleProjects">Load Sample Projects</button>
+                                <button type="button" class="btn" id="saveProjectsToGitHub">Save All to GitHub</button>
                             </div>
                         </form>
-                        <div class="item-list" id="projectsList">
-                            <!-- Projects list for management -->
-                        </div>
+                        <div class="item-list" id="projectsList"></div>
                     </div>
 
                     <!-- Certifications Admin -->
@@ -306,33 +313,26 @@
                                 <textarea id="certificationDescription" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="certificationIcon">Icon (FontAwesome class)</label>
+                                <label for="certificationImage">Certificate Image URL</label>
+                                <input type="text" id="certificationImage" class="form-control" placeholder="https://example.com/certificate.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label for="certificationIcon">Icon (if no image)</label>
                                 <input type="text" id="certificationIcon" class="form-control" value="fas fa-certificate" required>
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Add Certification</button>
-                                <button type="button" class="btn" id="loadSampleCertifications">Load Sample Certifications</button>
+                                <button type="button" class="btn" id="saveCertsToGitHub">Save All to GitHub</button>
                             </div>
                         </form>
-                        <div class="item-list" id="certificationsList">
-                            <!-- Certifications list for management -->
-                        </div>
+                        <div class="item-list" id="certificationsList"></div>
                     </div>
 
                     <!-- Resume Admin -->
                     <div class="admin-form" id="resumeForm">
                         <h3>Manage Resume</h3>
-                        <form id="updateResumeForm">
-                            <div class="form-group">
-                                <label for="resumeDownloadLink">Resume Download Link</label>
-                                <input type="text" id="resumeDownloadLink" class="form-control" required>
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn">Update Resume Link</button>
-                            </div>
-                        </form>
-
-                        <h4 style="margin-top: 2rem;">Education</h4>
+                        
+                        <h4>Education</h4>
                         <form id="addEducationForm">
                             <div class="form-group">
                                 <label for="educationDegree">Degree</label>
@@ -350,11 +350,9 @@
                                 <button type="submit" class="btn">Add Education</button>
                             </div>
                         </form>
-                        <div class="item-list" id="educationList">
-                            <!-- Education list for management -->
-                        </div>
+                        <div class="item-list" id="educationList"></div>
 
-                        <h4 style="margin-top: 2rem;">Experience</h4>
+                        <h4>Experience</h4>
                         <form id="addExperienceForm">
                             <div class="form-group">
                                 <label for="experiencePosition">Position</label>
@@ -372,11 +370,9 @@
                                 <button type="submit" class="btn">Add Experience</button>
                             </div>
                         </form>
-                        <div class="item-list" id="experienceList">
-                            <!-- Experience list for management -->
-                        </div>
+                        <div class="item-list" id="experienceList"></div>
 
-                        <h4 style="margin-top: 2rem;">Skills</h4>
+                        <h4>Skills</h4>
                         <form id="addSkillForm">
                             <div class="form-group">
                                 <label for="skillCategory">Category</label>
@@ -388,11 +384,10 @@
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Add Skills</button>
+                                <button type="button" class="btn" id="saveResumeToGitHub">Save Resume to GitHub</button>
                             </div>
                         </form>
-                        <div class="item-list" id="skillsList">
-                            <!-- Skills list for management -->
-                        </div>
+                        <div class="item-list" id="skillsList"></div>
                     </div>
 
                     <!-- Services Admin -->
@@ -408,17 +403,15 @@
                                 <textarea id="serviceDescription" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="serviceIcon">Icon (FontAwesome class)</label>
+                                <label for="serviceIcon">Icon</label>
                                 <input type="text" id="serviceIcon" class="form-control" value="fas fa-cogs" required>
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Add Service</button>
-                                <button type="button" class="btn" id="loadSampleServices">Load Sample Services</button>
+                                <button type="button" class="btn" id="saveServicesToGitHub">Save All to GitHub</button>
                             </div>
                         </form>
-                        <div class="item-list" id="servicesList">
-                            <!-- Services list for management -->
-                        </div>
+                        <div class="item-list" id="servicesList"></div>
                     </div>
 
                     <!-- Blogs Admin -->
@@ -442,24 +435,44 @@
                                 <input type="text" id="blogCategory" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="blogIcon">Icon (FontAwesome class)</label>
+                                <label for="blogImage">Blog Image URL</label>
+                                <input type="text" id="blogImage" class="form-control" placeholder="https://example.com/blog-image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label for="blogIcon">Icon (if no image)</label>
                                 <input type="text" id="blogIcon" class="form-control" value="fas fa-blog" required>
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Add Blog</button>
-                                <button type="button" class="btn" id="loadSampleBlogs">Load Sample Blogs</button>
+                                <button type="button" class="btn" id="saveBlogsToGitHub">Save All to GitHub</button>
                             </div>
                         </form>
-                        <div class="item-list" id="blogsList">
-                            <!-- Blogs list for management -->
-                        </div>
+                        <div class="item-list" id="blogsList"></div>
                     </div>
 
-                    <!-- Reviews Admin -->
-                    <div class="admin-form" id="reviewsForm">
-                        <h3>Manage Reviews</h3>
-                        <div class="item-list" id="adminReviewsList">
-                            <!-- Reviews list for management -->
+                    <!-- GitHub Sync Admin -->
+                    <div class="admin-form" id="githubForm">
+                        <h3>GitHub Data Sync</h3>
+                        <div class="form-group">
+                            <p>Your data is stored in JSON files in your GitHub repository.</p>
+                            <p><strong>File Structure:</strong></p>
+                            <ul>
+                                <li><code>data/config.json</code> - Profile & Settings</li>
+                                <li><code>data/projects.json</code> - Projects</li>
+                                <li><code>data/certifications.json</code> - Certifications</li>
+                                <li><code>data/blogs.json</code> - Blogs</li>
+                                <li><code>data/services.json</code> - Services</li>
+                                <li><code>data/resume.json</code> - Resume Data</li>
+                                <li><code>data/reviews.json</code> - Reviews</li>
+                            </ul>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn" id="loadFromGitHub">Reload from GitHub</button>
+                            <button type="button" class="btn" id="saveAllToGitHub">Save All Data to GitHub</button>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Data Status</label>
+                            <div id="dataStatus">Loading...</div>
                         </div>
                     </div>
                 </div>
@@ -467,29 +480,23 @@
         </div>
     </div>
 
-    <!-- Project Detail Modal -->
+    <!-- Modals -->
     <div class="modal" id="projectModal">
         <div class="modal-content">
             <button class="close-modal" id="closeProjectModal">&times;</button>
             <h2 id="modalProjectTitle">Project Title</h2>
-            <div id="modalProjectContent">
-                <!-- Project details loaded dynamically -->
-            </div>
+            <div id="modalProjectContent"></div>
         </div>
     </div>
 
-    <!-- Certification Detail Modal -->
     <div class="modal" id="certificationModal">
         <div class="modal-content">
             <button class="close-modal" id="closeCertificationModal">&times;</button>
             <h2 id="modalCertificationTitle">Certification Title</h2>
-            <div id="modalCertificationContent">
-                <!-- Certification details loaded dynamically -->
-            </div>
+            <div id="modalCertificationContent"></div>
         </div>
     </div>
 
-    <!-- Blog Detail Modal -->
     <div class="modal" id="blogModal">
         <div class="modal-content">
             <button class="close-modal" id="closeBlogModal">&times;</button>
@@ -498,14 +505,7 @@
                 <span id="modalBlogDate">Date</span>
                 <span id="modalBlogCategory">Category</span>
             </div>
-            <div id="modalBlogContent">
-                <!-- Blog content loaded dynamically -->
-            </div>
-            <div class="blog-actions" style="margin-top: 2rem;">
-                <button><i class="far fa-heart"></i> Like</button>
-                <button><i class="far fa-comment"></i> Comment</button>
-                <button><i class="fas fa-share"></i> Share</button>
-            </div>
+            <div id="modalBlogContent"></div>
         </div>
     </div>
 
