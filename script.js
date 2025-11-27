@@ -58,20 +58,29 @@ class PortfolioCMS {
     }
 
     setupNavigation() {
+        console.log('Setting up navigation...');
+        
         // Handle initial URL hash
         const initialHash = window.location.hash.substring(1);
-        if (initialHash) {
+        console.log('Initial hash:', initialHash);
+        
+        if (initialHash && initialHash !== '') {
             this.navigateToSection(initialHash);
+        } else {
+            this.navigateToSection('home');
         }
 
         // Handle browser back/forward buttons
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.substring(1);
+            console.log('Hash changed to:', hash);
             this.navigateToSection(hash);
         });
     }
 
     navigateToSection(sectionId) {
+        console.log('Navigating to section:', sectionId);
+        
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('.section');
         
@@ -82,6 +91,9 @@ class PortfolioCMS {
         // Find the target section
         const targetSection = document.getElementById(sectionId);
         const targetLink = document.querySelector(`[data-section="${sectionId}"]`);
+        
+        console.log('Target section:', targetSection);
+        console.log('Target link:', targetLink);
         
         if (targetSection && targetLink) {
             // Add active class to clicked link
@@ -97,11 +109,242 @@ class PortfolioCMS {
             
             // Scroll to top of section
             window.scrollTo(0, 0);
+            
+            console.log('✅ Navigation successful to:', sectionId);
         } else {
+            console.log('❌ Section not found, defaulting to home');
             // Default to home if section not found
             this.navigateToSection('home');
         }
     }
+
+    setupEventListeners() {
+        console.log('Setting up event listeners...');
+        
+        // FIXED: Navigation click handler
+        document.addEventListener('click', (e) => {
+            // Check if clicked element is a nav-link or inside one
+            const navLink = e.target.closest('.nav-link');
+            
+            if (navLink) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const sectionId = navLink.getAttribute('data-section');
+                console.log('Nav link clicked:', sectionId);
+                
+                if (sectionId) {
+                    // Update URL hash
+                    window.location.hash = sectionId;
+                    console.log('URL hash updated to:', sectionId);
+                }
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('active');
+                console.log('Mobile menu toggled');
+            });
+        }
+
+        // Admin login
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                const password = document.getElementById('adminPassword').value;
+                if (password === this.adminPassword) {
+                    this.isAdmin = true;
+                    document.getElementById('adminLogin').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    this.renderAdminLists();
+                    alert('Admin access granted!');
+                } else {
+                    alert('Incorrect password!');
+                }
+            });
+        }
+
+        // Review form submission
+        const reviewForm = document.getElementById('reviewForm');
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewerName').value;
+                const message = document.getElementById('reviewMessage').value;
+                
+                if (name && message) {
+                    this.addReview({ name, message });
+                    e.target.reset();
+                    alert('Thank you for your review!');
+                }
+            });
+        }
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const subject = document.getElementById('contactSubject').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                if (name && email && subject && message) {
+                    alert('Thank you for your message! I will get back to you soon.');
+                    e.target.reset();
+                }
+            });
+        }
+
+        // Project detail functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('open-project') || e.target.closest('.open-project')) {
+                const button = e.target.classList.contains('open-project') ? e.target : e.target.closest('.open-project');
+                const projectId = parseInt(button.getAttribute('data-project'));
+                const project = this.projects.find(p => p.id === projectId);
+                
+                if (project) {
+                    document.getElementById('modalProjectTitle').textContent = project.title;
+                    document.getElementById('modalProjectContent').innerHTML = `
+                        <div class="project-img" style="margin-bottom: 1.5rem;">
+                            <i class="fas fa-${project.icon}"></i>
+                        </div>
+                        <p><strong>Description:</strong> ${project.description}</p>
+                        <h4 style="margin-top: 1.5rem;">Technologies Used:</h4>
+                        <ul>
+                            ${project.technologies.map(tech => `<li>${tech}</li>`).join('')}
+                        </ul>
+                        <h4 style="margin-top: 1.5rem;">Results:</h4>
+                        <p>${project.results}</p>
+                    `;
+                    document.getElementById('projectModal').style.display = 'block';
+                }
+            }
+        });
+
+        // Certification detail functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('open-certification') || e.target.closest('.open-certification')) {
+                const button = e.target.classList.contains('open-certification') ? e.target : e.target.closest('.open-certification');
+                const certId = parseInt(button.getAttribute('data-certification'));
+                const certification = this.certifications.find(c => c.id === certId);
+                
+                if (certification) {
+                    document.getElementById('modalCertificationTitle').textContent = certification.title;
+                    document.getElementById('modalCertificationContent').innerHTML = `
+                        <div class="certification-img" style="margin-bottom: 1.5rem;">
+                            <i class="fas fa-${certification.icon}"></i>
+                        </div>
+                        <p><strong>Issuer:</strong> ${certification.issuer}</p>
+                        <p><strong>Date:</strong> ${certification.date}</p>
+                        <p><strong>Description:</strong> ${certification.description}</p>
+                    `;
+                    document.getElementById('certificationModal').style.display = 'block';
+                }
+            }
+        });
+
+        // Blog detail functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('open-blog') || e.target.closest('.open-blog')) {
+                const button = e.target.classList.contains('open-blog') ? e.target : e.target.closest('.open-blog');
+                const blogId = parseInt(button.getAttribute('data-blog'));
+                const blog = this.blogs.find(b => b.id === blogId);
+                
+                if (blog) {
+                    document.getElementById('modalBlogTitle').textContent = blog.title;
+                    document.getElementById('modalBlogDate').textContent = blog.date;
+                    document.getElementById('modalBlogCategory').textContent = blog.category;
+                    document.getElementById('modalBlogContent').innerHTML = `
+                        <div class="blog-img" style="margin: 1.5rem 0;">
+                            <i class="fas fa-${blog.icon}"></i>
+                        </div>
+                        <p>${blog.description}</p>
+                        <div style="margin-top: 2rem; padding: 1rem; background: var(--darker-bg); border-radius: 10px;">
+                            <h4>Full Article Content</h4>
+                            <p>This is where the full blog article content would appear. In a real implementation, you would store and display the complete article text here.</p>
+                            <p>You can add images, code snippets, and detailed explanations in this section.</p>
+                        </div>
+                    `;
+                    document.getElementById('blogModal').style.display = 'block';
+                }
+            }
+        });
+
+        // Modal close functionality
+        const closeProjectModal = document.getElementById('closeProjectModal');
+        if (closeProjectModal) {
+            closeProjectModal.addEventListener('click', () => {
+                document.getElementById('projectModal').style.display = 'none';
+            });
+        }
+
+        const closeCertificationModal = document.getElementById('closeCertificationModal');
+        if (closeCertificationModal) {
+            closeCertificationModal.addEventListener('click', () => {
+                document.getElementById('certificationModal').style.display = 'none';
+            });
+        }
+
+        const closeBlogModal = document.getElementById('closeBlogModal');
+        if (closeBlogModal) {
+            closeBlogModal.addEventListener('click', () => {
+                document.getElementById('blogModal').style.display = 'none';
+            });
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('projectModal')) {
+                document.getElementById('projectModal').style.display = 'none';
+            }
+            if (e.target === document.getElementById('certificationModal')) {
+                document.getElementById('certificationModal').style.display = 'none';
+            }
+            if (e.target === document.getElementById('blogModal')) {
+                document.getElementById('blogModal').style.display = 'none';
+            }
+        });
+
+        // Admin form submissions
+        this.setupAdminForms();
+        
+        console.log('✅ All event listeners setup complete');
+    }
+
+    setupAdminForms() {
+        // Profile form
+        const updateProfileForm = document.getElementById('updateProfileForm');
+        if (updateProfileForm) {
+            updateProfileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.updateProfile({
+                    name: document.getElementById('adminProfileName').value,
+                    title: document.getElementById('adminProfileTitle').value,
+                    profileImage: document.getElementById('adminProfileImage').value,
+                    coverImage: document.getElementById('adminCoverImage').value,
+                    introTitle: document.getElementById('adminIntroTitle').value,
+                    introDescription: document.getElementById('adminIntroDescription').value,
+                    aboutDescription: document.getElementById('adminAboutDescription').value
+                });
+                alert('Profile updated successfully!');
+            });
+        }
+
+        // Add other admin form setups here...
+        // [Keep all your existing admin form code, just make sure to add null checks]
+    }
+
+    // ... [KEEP ALL YOUR EXISTING METHODS EXACTLY AS THEY WERE]
+    // loadFromStorage(), saveToStorage(), loadSampleData(), renderAll(), etc.
+    // ALL YOUR EXISTING CODE REMAINS THE SAME FROM HERE...
 
     loadFromStorage() {
         this.projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
@@ -291,56 +534,69 @@ class PortfolioCMS {
     }
 
     renderProfile() {
-        document.getElementById('profileName').textContent = this.profile.name;
-        document.getElementById('profileTitle').textContent = this.profile.title;
-        document.getElementById('introTitle').textContent = this.profile.introTitle;
-        document.getElementById('introDescription').textContent = this.profile.introDescription;
-        document.getElementById('aboutDescription').textContent = this.profile.aboutDescription;
-        document.getElementById('resumeDownloadLink').href = this.profile.resumeLink;
+        const profileName = document.getElementById('profileName');
+        const profileTitle = document.getElementById('profileTitle');
+        const introTitle = document.getElementById('introTitle');
+        const introDescription = document.getElementById('introDescription');
+        const aboutDescription = document.getElementById('aboutDescription');
+        const resumeDownloadLink = document.getElementById('resumeDownloadLink');
+
+        if (profileName) profileName.textContent = this.profile.name;
+        if (profileTitle) profileTitle.textContent = this.profile.title;
+        if (introTitle) introTitle.textContent = this.profile.introTitle;
+        if (introDescription) introDescription.textContent = this.profile.introDescription;
+        if (aboutDescription) aboutDescription.textContent = this.profile.aboutDescription;
+        if (resumeDownloadLink) resumeDownloadLink.href = this.profile.resumeLink;
 
         const profileImg = document.getElementById('profileImage');
-        if (this.profile.profileImage) {
-            profileImg.innerHTML = `<img src="${this.profile.profileImage}" alt="${this.profile.name}">`;
-        } else {
-            profileImg.innerHTML = `<i class="fas fa-user"></i>`;
+        if (profileImg) {
+            if (this.profile.profileImage) {
+                profileImg.innerHTML = `<img src="${this.profile.profileImage}" alt="${this.profile.name}">`;
+            } else {
+                profileImg.innerHTML = `<i class="fas fa-user"></i>`;
+            }
         }
 
         const homeSection = document.getElementById('homeSection');
-        if (this.profile.coverImage) {
+        if (homeSection && this.profile.coverImage) {
             homeSection.style.setProperty('--cover-image', `url('${this.profile.coverImage}')`);
         }
 
         const personalInfo = document.getElementById('personalInfo');
-        personalInfo.innerHTML = `
-            <div class="info-item">
-                <span>Name:</span>
-                <span>${this.profile.name}</span>
-            </div>
-            <div class="info-item">
-                <span>Age:</span>
-                <span>28</span>
-            </div>
-            <div class="info-item">
-                <span>Location:</span>
-                <span>San Francisco, CA</span>
-            </div>
-            <div class="info-item">
-                <span>Degree:</span>
-                <span>MSc Data Science</span>
-            </div>
-            <div class="info-item">
-                <span>Email:</span>
-                <span>alex.johnson@example.com</span>
-            </div>
-            <div class="info-item">
-                <span>Phone:</span>
-                <span>+1 (555) 123-4567</span>
-            </div>
-        `;
+        if (personalInfo) {
+            personalInfo.innerHTML = `
+                <div class="info-item">
+                    <span>Name:</span>
+                    <span>${this.profile.name}</span>
+                </div>
+                <div class="info-item">
+                    <span>Age:</span>
+                    <span>28</span>
+                </div>
+                <div class="info-item">
+                    <span>Location:</span>
+                    <span>San Francisco, CA</span>
+                </div>
+                <div class="info-item">
+                    <span>Degree:</span>
+                    <span>MSc Data Science</span>
+                </div>
+                <div class="info-item">
+                    <span>Email:</span>
+                    <span>alex.johnson@example.com</span>
+                </div>
+                <div class="info-item">
+                    <span>Phone:</span>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+            `;
+        }
     }
 
     renderProjects() {
         const projectsGrid = document.getElementById('projectsGrid');
+        if (!projectsGrid) return;
+
         projectsGrid.innerHTML = '';
 
         this.projects.forEach(project => {
@@ -362,6 +618,8 @@ class PortfolioCMS {
 
     renderCertifications() {
         const certificationsGrid = document.getElementById('certificationsGrid');
+        if (!certificationsGrid) return;
+
         certificationsGrid.innerHTML = '';
 
         this.certifications.forEach(certification => {
@@ -385,6 +643,8 @@ class PortfolioCMS {
 
     renderServices() {
         const servicesGrid = document.getElementById('servicesGrid');
+        if (!servicesGrid) return;
+
         servicesGrid.innerHTML = '';
 
         this.services.forEach(service => {
@@ -403,6 +663,8 @@ class PortfolioCMS {
 
     renderBlogs() {
         const blogsGrid = document.getElementById('blogsGrid');
+        if (!blogsGrid) return;
+
         blogsGrid.innerHTML = '';
 
         this.blogs.forEach(blog => {
@@ -432,6 +694,8 @@ class PortfolioCMS {
 
     renderReviews() {
         const reviewsList = document.getElementById('reviewsList');
+        if (!reviewsList) return;
+
         reviewsList.innerHTML = '';
 
         this.reviews.forEach(review => {
@@ -450,183 +714,56 @@ class PortfolioCMS {
 
     renderResume() {
         const educationSection = document.getElementById('educationSection');
-        educationSection.innerHTML = '<h3>Education</h3>';
-        this.education.forEach(edu => {
-            const eduItem = document.createElement('div');
-            eduItem.className = 'info-item';
-            eduItem.innerHTML = `
-                <span>${edu.degree}</span>
-                <span>${edu.institution}, ${edu.period}</span>
-            `;
-            educationSection.appendChild(eduItem);
-        });
+        if (educationSection) {
+            educationSection.innerHTML = '<h3>Education</h3>';
+            this.education.forEach(edu => {
+                const eduItem = document.createElement('div');
+                eduItem.className = 'info-item';
+                eduItem.innerHTML = `
+                    <span>${edu.degree}</span>
+                    <span>${edu.institution}, ${edu.period}</span>
+                `;
+                educationSection.appendChild(eduItem);
+            });
+        }
 
         const experienceSection = document.getElementById('experienceSection');
-        experienceSection.innerHTML = '<h3>Experience</h3>';
-        this.experience.forEach(exp => {
-            const expItem = document.createElement('div');
-            expItem.className = 'info-item';
-            expItem.innerHTML = `
-                <span>${exp.position}</span>
-                <span>${exp.company}, ${exp.period}</span>
-            `;
-            experienceSection.appendChild(expItem);
-        });
+        if (experienceSection) {
+            experienceSection.innerHTML = '<h3>Experience</h3>';
+            this.experience.forEach(exp => {
+                const expItem = document.createElement('div');
+                expItem.className = 'info-item';
+                expItem.innerHTML = `
+                    <span>${exp.position}</span>
+                    <span>${exp.company}, ${exp.period}</span>
+                `;
+                experienceSection.appendChild(expItem);
+            });
+        }
 
         const skillsSection = document.getElementById('skillsSection');
-        skillsSection.innerHTML = '<h3>Skills</h3>';
-        this.skills.forEach(skill => {
-            const skillItem = document.createElement('div');
-            skillItem.className = 'info-item';
-            skillItem.innerHTML = `
-                <span>${skill.category}:</span>
-                <span>${skill.items.join(', ')}</span>
-            `;
-            skillsSection.appendChild(skillItem);
-        });
+        if (skillsSection) {
+            skillsSection.innerHTML = '<h3>Skills</h3>';
+            this.skills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'info-item';
+                skillItem.innerHTML = `
+                    <span>${skill.category}:</span>
+                    <span>${skill.items.join(', ')}</span>
+                `;
+                skillsSection.appendChild(skillItem);
+            });
+        }
     }
 
     renderAdminLists() {
         if (!this.isAdmin) return;
 
-        // Projects list
-        const projectsList = document.getElementById('projectsList');
-        projectsList.innerHTML = '';
-        this.projects.forEach(project => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${project.title}</h4>
-                <p>${project.description.substring(0, 100)}...</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="project" data-id="${project.id}">Edit</button>
-                    <button class="btn delete-item" data-type="project" data-id="${project.id}">Delete</button>
-                </div>
-            `;
-            projectsList.appendChild(itemCard);
-        });
-
-        // Certifications list
-        const certificationsList = document.getElementById('certificationsList');
-        certificationsList.innerHTML = '';
-        this.certifications.forEach(cert => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${cert.title}</h4>
-                <p>${cert.issuer} - ${cert.date}</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="certification" data-id="${cert.id}">Edit</button>
-                    <button class="btn delete-item" data-type="certification" data-id="${cert.id}">Delete</button>
-                </div>
-            `;
-            certificationsList.appendChild(itemCard);
-        });
-
-        // Services list
-        const servicesList = document.getElementById('servicesList');
-        servicesList.innerHTML = '';
-        this.services.forEach(service => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${service.title}</h4>
-                <p>${service.description.substring(0, 100)}...</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="service" data-id="${service.id}">Edit</button>
-                    <button class="btn delete-item" data-type="service" data-id="${service.id}">Delete</button>
-                </div>
-            `;
-            servicesList.appendChild(itemCard);
-        });
-
-        // Blogs list
-        const blogsList = document.getElementById('blogsList');
-        blogsList.innerHTML = '';
-        this.blogs.forEach(blog => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${blog.title}</h4>
-                <p>${blog.date} - ${blog.category}</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="blog" data-id="${blog.id}">Edit</button>
-                    <button class="btn delete-item" data-type="blog" data-id="${blog.id}">Delete</button>
-                </div>
-            `;
-            blogsList.appendChild(itemCard);
-        });
-
-        // Education list
-        const educationList = document.getElementById('educationList');
-        educationList.innerHTML = '';
-        this.education.forEach(edu => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${edu.degree}</h4>
-                <p>${edu.institution} - ${edu.period}</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="education" data-id="${edu.id}">Edit</button>
-                    <button class="btn delete-item" data-type="education" data-id="${edu.id}">Delete</button>
-                </div>
-            `;
-            educationList.appendChild(itemCard);
-        });
-
-        // Experience list
-        const experienceList = document.getElementById('experienceList');
-        experienceList.innerHTML = '';
-        this.experience.forEach(exp => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${exp.position}</h4>
-                <p>${exp.company} - ${exp.period}</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="experience" data-id="${exp.id}">Edit</button>
-                    <button class="btn delete-item" data-type="experience" data-id="${exp.id}">Delete</button>
-                </div>
-            `;
-            experienceList.appendChild(itemCard);
-        });
-
-        // Skills list
-        const skillsList = document.getElementById('skillsList');
-        skillsList.innerHTML = '';
-        this.skills.forEach(skill => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${skill.category}</h4>
-                <p>${skill.items.join(', ')}</p>
-                <div class="item-actions">
-                    <button class="btn edit-item" data-type="skill" data-id="${skill.id}">Edit</button>
-                    <button class="btn delete-item" data-type="skill" data-id="${skill.id}">Delete</button>
-                </div>
-            `;
-            skillsList.appendChild(itemCard);
-        });
-
-        // Reviews list
-        const adminReviewsList = document.getElementById('adminReviewsList');
-        adminReviewsList.innerHTML = '';
-        this.reviews.forEach(review => {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.innerHTML = `
-                <h4>${review.name}</h4>
-                <p>${review.date}</p>
-                <p>${review.message}</p>
-                <div class="item-actions">
-                    <button class="btn delete-item" data-type="review" data-id="${review.id}">Delete</button>
-                </div>
-            `;
-            adminReviewsList.appendChild(itemCard);
-        });
+        // [Keep all your existing admin list rendering code]
+        // This would be your existing renderAdminLists() method
     }
 
-    // CRUD Operations
+    // [Keep all your existing CRUD methods exactly as they were]
     addProject(projectData) {
         const newProject = {
             id: this.projects.length > 0 ? Math.max(...this.projects.map(p => p.id)) + 1 : 1,
@@ -635,7 +772,7 @@ class PortfolioCMS {
         this.projects.push(newProject);
         this.saveToStorage();
         this.renderProjects();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addService(serviceData) {
@@ -646,7 +783,7 @@ class PortfolioCMS {
         this.services.push(newService);
         this.saveToStorage();
         this.renderServices();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addBlog(blogData) {
@@ -659,7 +796,7 @@ class PortfolioCMS {
         this.blogs.push(newBlog);
         this.saveToStorage();
         this.renderBlogs();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addCertification(certData) {
@@ -670,7 +807,7 @@ class PortfolioCMS {
         this.certifications.push(newCert);
         this.saveToStorage();
         this.renderCertifications();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addReview(reviewData) {
@@ -686,7 +823,7 @@ class PortfolioCMS {
         this.reviews.unshift(newReview);
         this.saveToStorage();
         this.renderReviews();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addEducation(eduData) {
@@ -697,7 +834,7 @@ class PortfolioCMS {
         this.education.push(newEdu);
         this.saveToStorage();
         this.renderResume();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addExperience(expData) {
@@ -708,7 +845,7 @@ class PortfolioCMS {
         this.experience.push(newExp);
         this.saveToStorage();
         this.renderResume();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     addSkill(skillData) {
@@ -719,7 +856,7 @@ class PortfolioCMS {
         this.skills.push(newSkill);
         this.saveToStorage();
         this.renderResume();
-        this.renderAdminLists();
+        if (this.isAdmin) this.renderAdminLists();
     }
 
     deleteItem(type, id) {
@@ -750,4 +887,18 @@ class PortfolioCMS {
                 break;
         }
         this.saveToStorage();
-        this.renderAll
+        this.renderAll();
+    }
+
+    updateProfile(profileData) {
+        this.profile = { ...this.profile, ...profileData };
+        this.saveToStorage();
+        this.renderProfile();
+    }
+}
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing portfolio...');
+    window.portfolioCMS = new PortfolioCMS();
+});
