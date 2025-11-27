@@ -29,7 +29,7 @@ body {
     position: relative;
 }
 
-/* Galaxy Background Animation */
+/* Galaxy Background */
 body::before {
     content: '';
     position: fixed;
@@ -181,7 +181,7 @@ body::before {
     transform: translateY(-3px);
 }
 
-/* Main Content Styles */
+/* Main Content */
 .main-content {
     width: var(--content-width);
     margin-left: var(--sidebar-width);
@@ -270,6 +270,16 @@ body::before {
     box-shadow: 0 10px 25px rgba(138, 43, 226, 0.5);
 }
 
+.btn-secondary {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--darker-bg);
+    transform: translateY(-3px);
+}
+
 /* About Section */
 .about-content {
     display: grid;
@@ -343,6 +353,17 @@ body::before {
     justify-content: center;
     font-size: 3rem;
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .project-content {
@@ -431,6 +452,17 @@ body::before {
     justify-content: center;
     font-size: 2rem;
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.certification-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .certification-content {
@@ -554,6 +586,17 @@ textarea.form-control {
     justify-content: center;
     font-size: 3rem;
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .blog-content {
@@ -736,6 +779,38 @@ textarea.form-control {
 
 .close-modal:hover {
     color: var(--galaxy-purple);
+}
+
+/* Loading States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.status-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.status-success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4caf50;
+    color: #4caf50;
+}
+
+.status-error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #f44336;
+}
+
+.status-info {
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196f3;
+    color: #2196f3;
 }
 
 /* Responsive Design */
