@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Scientist Portfolio</title>
+    <title>Data Scientist Portfolio - Galaxy Theme</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #6c63ff;
             --secondary-color: #4a44c6;
-            --dark-bg: #121212;
-            --darker-bg: #0a0a0a;
-            --card-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --border-color: #333;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --card-bg: rgba(16, 16, 32, 0.8);
+            --text-color: #e0e0ff;
+            --text-muted: #a0a0cc;
+            --border-color: #333355;
             --sidebar-width: 20%;
             --content-width: 80%;
+            --galaxy-purple: #8a2be2;
+            --galaxy-blue: #4169e1;
+            --galaxy-pink: #ff69b4;
         }
 
         * {
@@ -27,9 +30,54 @@
         }
 
         body {
-            background-color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, #1a1a2e 50%, #16213e 100%);
             color: var(--text-color);
             overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Galaxy Background Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(65, 105, 225, 0.2) 0%, transparent 50%);
+            animation: galaxyMove 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes galaxyMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .container {
@@ -40,13 +88,14 @@
         /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
-            background-color: var(--darker-bg);
+            background: rgba(10, 10, 26, 0.9);
             padding: 2rem 1.5rem;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             border-right: 1px solid var(--border-color);
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
         .profile {
@@ -58,21 +107,31 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 5px solid var(--primary-color);
+            border: 4px solid var(--galaxy-purple);
             margin: 0 auto 1rem;
             overflow: hidden;
-            background-color: #333;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-name {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .profile-title {
@@ -100,8 +159,9 @@
         }
 
         .nav-links a:hover, .nav-links a.active {
-            background-color: var(--primary-color);
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
             color: white;
+            transform: translateX(5px);
         }
 
         .nav-links i {
@@ -121,11 +181,12 @@
         .social-links a {
             color: var(--text-color);
             font-size: 1.2rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: var(--primary-color);
+            color: var(--galaxy-purple);
+            transform: translateY(-3px);
         }
 
         /* Main Content Styles */
@@ -153,22 +214,38 @@
 
         /* Home Section */
         .home-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: linear-gradient(rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.9)), var(--cover-image) no-repeat center center;
             background-size: cover;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             padding-left: 5%;
+            border-radius: 15px;
+            margin: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.2), rgba(65, 105, 225, 0.2));
+            z-index: -1;
         }
 
         .intro-content {
             max-width: 600px;
+            z-index: 2;
         }
 
         .intro-content h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-pink), var(--galaxy-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: slideInLeft 1s ease;
@@ -179,25 +256,26 @@
             line-height: 1.6;
             margin-bottom: 2rem;
             animation: slideInLeft 1.2s ease;
+            color: var(--text-color);
         }
 
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color);
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
 
         .btn:hover {
-            background-color: var(--secondary-color);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.5);
         }
 
         /* About Section */
@@ -214,7 +292,7 @@
 
         .about-text h3 {
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--galaxy-purple);
         }
 
         .about-text p {
@@ -230,11 +308,15 @@
 
         .info-item {
             margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border-left: 4px solid var(--galaxy-purple);
         }
 
         .info-item span:first-child {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--galaxy-purple);
             display: block;
             margin-bottom: 0.3rem;
         }
@@ -248,25 +330,27 @@
         }
 
         .project-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background: var(--card-bg);
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.3);
+            border-color: var(--galaxy-purple);
         }
 
         .project-img {
             height: 200px;
-            background-color: #333;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--primary-color);
+            color: white;
         }
 
         .project-content {
@@ -275,6 +359,7 @@
 
         .project-content h3 {
             margin-bottom: 0.5rem;
+            color: var(--galaxy-purple);
         }
 
         .project-content p {
@@ -292,30 +377,84 @@
         }
 
         .service-card {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .service-card:hover {
             transform: translateY(-10px);
+            border-color: var(--galaxy-purple);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
         }
 
         .service-icon {
             font-size: 3rem;
-            color: var(--primary-color);
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
         }
 
         .service-card h3 {
             margin-bottom: 1rem;
+            color: var(--galaxy-purple);
         }
 
         .service-card p {
             color: var(--text-muted);
             line-height: 1.5;
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+            border-color: var(--galaxy-purple);
+        }
+
+        .certification-img {
+            height: 150px;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .certification-content {
+            padding: 1.5rem;
+        }
+
+        .certification-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--galaxy-purple);
+        }
+
+        .certification-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
         /* Reviews Section */
@@ -325,10 +464,11 @@
         }
 
         .review-form {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
         }
 
         .form-group {
@@ -339,15 +479,23 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--galaxy-purple);
         }
 
         .form-control {
             width: 100%;
             padding: 0.8rem;
-            background-color: var(--darker-bg);
+            background: var(--darker-bg);
             border: 1px solid var(--border-color);
-            border-radius: 5px;
+            border-radius: 8px;
             color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--galaxy-purple);
+            outline: none;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
         }
 
         textarea.form-control {
@@ -362,10 +510,10 @@
         }
 
         .review-item {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
+            border-radius: 15px;
+            border-left: 4px solid var(--galaxy-purple);
         }
 
         .review-header {
@@ -376,6 +524,7 @@
 
         .reviewer-name {
             font-weight: 600;
+            color: var(--galaxy-purple);
         }
 
         .review-date {
@@ -392,24 +541,27 @@
         }
 
         .blog-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background: var(--card-bg);
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .blog-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.3);
+            border-color: var(--galaxy-purple);
         }
 
         .blog-img {
             height: 200px;
-            background-color: #333;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--primary-color);
+            color: white;
         }
 
         .blog-content {
@@ -426,6 +578,7 @@
 
         .blog-content h3 {
             margin-bottom: 0.5rem;
+            color: var(--galaxy-purple);
         }
 
         .blog-content p {
@@ -449,32 +602,68 @@
         }
 
         .blog-actions button:hover {
-            color: var(--primary-color);
+            color: var(--galaxy-purple);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
         }
 
         /* Admin Panel */
-        .admin-panel {
-            background-color: var(--card-bg);
+        .admin-login {
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: 2rem auto;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .admin-panel {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
             margin-top: 2rem;
+            border: 1px solid var(--border-color);
         }
 
         .admin-tabs {
             display: flex;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
         }
 
         .admin-tab {
             padding: 0.8rem 1.5rem;
             cursor: pointer;
             border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .admin-tab.active {
-            border-bottom: 3px solid var(--primary-color);
-            color: var(--primary-color);
+            border-bottom: 3px solid var(--galaxy-purple);
+            color: var(--galaxy-purple);
         }
 
         .admin-form {
@@ -489,9 +678,81 @@
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .item-list {
+            margin-top: 2rem;
+        }
+
+        .item-card {
+            background: var(--darker-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .item-actions button {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover {
+            color: var(--galaxy-purple);
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .certifications-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 width: 250px;
@@ -514,20 +775,22 @@
                 top: 20px;
                 left: 20px;
                 z-index: 101;
-                background-color: var(--primary-color);
+                background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
                 color: white;
                 border: none;
                 width: 40px;
                 height: 40px;
-                border-radius: 5px;
+                border-radius: 50%;
                 font-size: 1.2rem;
                 cursor: pointer;
+                box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
             }
             
             .about-content,
             .projects-grid,
             .services-grid,
-            .blogs-grid {
+            .blogs-grid,
+            .certifications-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -558,54 +821,33 @@
             animation: slideInLeft 1s ease;
         }
 
-        /* Blog Detail Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            margin: 5% auto;
-            width: 80%;
-            max-width: 800px;
-            border-radius: 10px;
-            padding: 2rem;
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             position: relative;
         }
 
-        .close-modal {
+        h2::after {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-modal:hover {
-            color: var(--primary-color);
-        }
-
-        /* Project Detail Modal */
-        .project-detail {
-            display: none;
-        }
-
-        .project-detail.active {
-            display: block;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue));
+            border-radius: 2px;
         }
     </style>
 </head>
 <body>
+    <!-- Galaxy Background -->
+    <div class="stars" id="stars"></div>
+
     <button class="menu-toggle" id="menuToggle">
         <i class="fas fa-bars"></i>
     </button>
@@ -614,21 +856,23 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="profile">
-                <div class="profile-img">
+                <div class="profile-img" id="profileImage">
                     <i class="fas fa-user"></i>
                 </div>
-                <h2 class="profile-name">Alex Johnson</h2>
-                <p class="profile-title">Data Scientist & Analyst</p>
+                <h2 class="profile-name" id="profileName">Alex Johnson</h2>
+                <p class="profile-title" id="profileTitle">Data Scientist & Analyst</p>
             </div>
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i> About</a></li>
                 <li><a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#certifications" class="nav-link" data-section="certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
                 <li><a href="#resume" class="nav-link" data-section="resume"><i class="fas fa-file-alt"></i> Resume</a></li>
                 <li><a href="#services" class="nav-link" data-section="services"><i class="fas fa-cogs"></i> Services</a></li>
                 <li><a href="#reviews" class="nav-link" data-section="reviews"><i class="fas fa-star"></i> Reviews</a></li>
                 <li><a href="#blogs" class="nav-link" data-section="blogs"><i class="fas fa-blog"></i> Blogs</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 <li><a href="#admin" class="nav-link" data-section="admin"><i class="fas fa-cog"></i> Admin</a></li>
             </ul>
 
@@ -645,10 +889,10 @@
         <div class="main-content">
             <!-- Home Section -->
             <section id="home" class="section active">
-                <div class="home-section">
+                <div class="home-section" id="homeSection">
                     <div class="intro-content">
-                        <h1>Data Scientist & Analyst</h1>
-                        <p>Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization to drive business decisions.</p>
+                        <h1 id="introTitle">Data Scientist & Analyst</h1>
+                        <p id="introDescription">Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization to drive business decisions.</p>
                         <a href="#projects" class="btn">View My Work</a>
                     </div>
                 </div>
@@ -660,34 +904,11 @@
                 <div class="about-content">
                     <div class="about-text">
                         <h3>Professional Data Scientist</h3>
-                        <p>With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets. My expertise includes machine learning, statistical modeling, data visualization, and predictive analytics.</p>
+                        <p id="aboutDescription">With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets. My expertise includes machine learning, statistical modeling, data visualization, and predictive analytics.</p>
                         <p>I have worked with various industries including finance, healthcare, and e-commerce, helping organizations make data-driven decisions that improve efficiency and drive growth.</p>
                     </div>
-                    <div class="personal-info">
-                        <div class="info-item">
-                            <span>Name:</span>
-                            <span>Alex Johnson</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Age:</span>
-                            <span>28</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Location:</span>
-                            <span>San Francisco, CA</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Degree:</span>
-                            <span>MSc Data Science</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Email:</span>
-                            <span>alex.johnson@example.com</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Phone:</span>
-                            <span>+1 (555) 123-4567</span>
-                        </div>
+                    <div class="personal-info" id="personalInfo">
+                        <!-- Personal info loaded dynamically -->
                     </div>
                 </div>
             </section>
@@ -696,12 +917,15 @@
             <section id="projects" class="section">
                 <h2>My Projects</h2>
                 <div class="projects-grid" id="projectsGrid">
-                    <!-- Projects will be loaded dynamically from JSON -->
+                    <!-- Projects loaded dynamically -->
                 </div>
+            </section>
 
-                <!-- Project Details (hidden by default) -->
-                <div id="projectDetailsContainer">
-                    <!-- Project details will be loaded here -->
+            <!-- Certifications Section -->
+            <section id="certifications" class="section">
+                <h2>Certifications</h2>
+                <div class="certifications-grid" id="certificationsGrid">
+                    <!-- Certifications loaded dynamically -->
                 </div>
             </section>
 
@@ -709,49 +933,21 @@
             <section id="resume" class="section">
                 <h2>Resume</h2>
                 <div class="about-content">
-                    <div>
+                    <div id="educationSection">
                         <h3>Education</h3>
-                        <div class="info-item">
-                            <span>MSc Data Science</span>
-                            <span>Stanford University, 2018-2020</span>
-                        </div>
-                        <div class="info-item">
-                            <span>BSc Computer Science</span>
-                            <span>UC Berkeley, 2014-2018</span>
-                        </div>
-                        
-                        <h3>Experience</h3>
-                        <div class="info-item">
-                            <span>Senior Data Scientist</span>
-                            <span>TechCorp Inc., 2020-Present</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Data Analyst</span>
-                            <span>DataInsights LLC, 2018-2020</span>
-                        </div>
+                        <!-- Education loaded dynamically -->
                     </div>
-                    <div>
-                        <h3>Skills</h3>
-                        <div class="info-item">
-                            <span>Programming:</span>
-                            <span>Python, R, SQL, JavaScript</span>
-                        </div>
-                        <div class="info-item">
-                            <span>ML Libraries:</span>
-                            <span>Scikit-learn, TensorFlow, PyTorch</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Data Visualization:</span>
-                            <span>Tableau, Power BI, Matplotlib, D3.js</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Big Data:</span>
-                            <span>Hadoop, Spark, AWS, Azure</span>
-                        </div>
+                    <div id="experienceSection">
+                        <h3>Experience</h3>
+                        <!-- Experience loaded dynamically -->
                     </div>
                 </div>
+                <div id="skillsSection" style="margin-top: 2rem;">
+                    <h3>Skills</h3>
+                    <!-- Skills loaded dynamically -->
+                </div>
                 <div style="margin-top: 2rem; text-align: center;">
-                    <a href="#" class="btn"><i class="fas fa-download"></i> Download Resume</a>
+                    <a href="#" class="btn" id="resumeDownloadLink"><i class="fas fa-download"></i> Download Resume</a>
                 </div>
             </section>
 
@@ -759,7 +955,7 @@
             <section id="services" class="section">
                 <h2>My Services</h2>
                 <div class="services-grid" id="servicesGrid">
-                    <!-- Services will be loaded dynamically from JSON -->
+                    <!-- Services loaded dynamically -->
                 </div>
             </section>
 
@@ -783,7 +979,7 @@
                     </div>
 
                     <div class="reviews-list" id="reviewsList">
-                        <!-- Reviews will be loaded dynamically from JSON -->
+                        <!-- Reviews loaded dynamically -->
                     </div>
                 </div>
             </section>
@@ -792,23 +988,109 @@
             <section id="blogs" class="section">
                 <h2>My Blogs</h2>
                 <div class="blogs-grid" id="blogsGrid">
-                    <!-- Blogs will be loaded dynamically from JSON -->
+                    <!-- Blogs loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <h2>Contact Me</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> Email: alex.johnson@example.com</p>
+                        <p>Feel free to reach out for collaborations or just a friendly hello!</p>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName">Your Name</label>
+                                <input type="text" id="contactName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Your Email</label>
+                                <input type="email" id="contactEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject">Subject</label>
+                                <input type="text" id="contactSubject" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
                 </div>
             </section>
 
             <!-- Admin Section -->
             <section id="admin" class="section">
-                <h2>Content Management</h2>
-                <div class="admin-panel">
+                <h2>Admin Panel</h2>
+                
+                <!-- Admin Login -->
+                <div class="admin-login" id="adminLogin">
+                    <h3>Admin Access</h3>
+                    <p>Enter password to access admin panel</p>
+                    <div class="form-group">
+                        <input type="password" id="adminPassword" class="form-control" placeholder="Enter admin password">
+                    </div>
+                    <button class="btn" id="loginBtn">Login</button>
+                </div>
+
+                <!-- Admin Panel (Hidden by default) -->
+                <div class="admin-panel" id="adminPanel" style="display: none;">
                     <div class="admin-tabs">
-                        <div class="admin-tab active" data-tab="projects">Projects</div>
+                        <div class="admin-tab active" data-tab="profile">Profile</div>
+                        <div class="admin-tab" data-tab="projects">Projects</div>
+                        <div class="admin-tab" data-tab="certifications">Certifications</div>
+                        <div class="admin-tab" data-tab="resume">Resume</div>
                         <div class="admin-tab" data-tab="services">Services</div>
                         <div class="admin-tab" data-tab="blogs">Blogs</div>
+                        <div class="admin-tab" data-tab="reviews">Reviews</div>
                     </div>
 
-                    <!-- Projects Admin Form -->
-                    <div class="admin-form active" id="projectsForm">
-                        <h3>Add New Project</h3>
+                    <!-- Profile Admin -->
+                    <div class="admin-form active" id="profileForm">
+                        <h3>Update Profile</h3>
+                        <form id="updateProfileForm">
+                            <div class="form-group">
+                                <label for="adminProfileName">Full Name</label>
+                                <input type="text" id="adminProfileName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminProfileTitle">Professional Title</label>
+                                <input type="text" id="adminProfileTitle" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminProfileImage">Profile Image URL</label>
+                                <input type="text" id="adminProfileImage" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="adminCoverImage">Cover Image URL</label>
+                                <input type="text" id="adminCoverImage" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="adminIntroTitle">Intro Title</label>
+                                <input type="text" id="adminIntroTitle" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminIntroDescription">Intro Description</label>
+                                <textarea id="adminIntroDescription" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminAboutDescription">About Description</label>
+                                <textarea id="adminAboutDescription" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Update Profile</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Projects Admin -->
+                    <div class="admin-form" id="projectsForm">
+                        <h3>Manage Projects</h3>
                         <form id="addProjectForm">
                             <div class="form-group">
                                 <label for="projectTitle">Project Title</label>
@@ -835,11 +1117,124 @@
                                 <button type="button" class="btn" id="loadSampleProjects">Load Sample Projects</button>
                             </div>
                         </form>
+                        <div class="item-list" id="projectsList">
+                            <!-- Projects list for management -->
+                        </div>
                     </div>
 
-                    <!-- Services Admin Form -->
+                    <!-- Certifications Admin -->
+                    <div class="admin-form" id="certificationsForm">
+                        <h3>Manage Certifications</h3>
+                        <form id="addCertificationForm">
+                            <div class="form-group">
+                                <label for="certificationTitle">Certification Title</label>
+                                <input type="text" id="certificationTitle" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificationIssuer">Issuing Organization</label>
+                                <input type="text" id="certificationIssuer" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificationDate">Issue Date</label>
+                                <input type="text" id="certificationDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificationDescription">Description</label>
+                                <textarea id="certificationDescription" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificationIcon">Icon (FontAwesome class)</label>
+                                <input type="text" id="certificationIcon" class="form-control" value="fas fa-certificate" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Add Certification</button>
+                                <button type="button" class="btn" id="loadSampleCertifications">Load Sample Certifications</button>
+                            </div>
+                        </form>
+                        <div class="item-list" id="certificationsList">
+                            <!-- Certifications list for management -->
+                        </div>
+                    </div>
+
+                    <!-- Resume Admin -->
+                    <div class="admin-form" id="resumeForm">
+                        <h3>Manage Resume</h3>
+                        <form id="updateResumeForm">
+                            <div class="form-group">
+                                <label for="resumeDownloadLink">Resume Download Link</label>
+                                <input type="text" id="resumeDownloadLink" class="form-control" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Update Resume Link</button>
+                            </div>
+                        </form>
+
+                        <h4 style="margin-top: 2rem;">Education</h4>
+                        <form id="addEducationForm">
+                            <div class="form-group">
+                                <label for="educationDegree">Degree</label>
+                                <input type="text" id="educationDegree" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="educationInstitution">Institution</label>
+                                <input type="text" id="educationInstitution" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="educationPeriod">Period</label>
+                                <input type="text" id="educationPeriod" class="form-control" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Add Education</button>
+                            </div>
+                        </form>
+                        <div class="item-list" id="educationList">
+                            <!-- Education list for management -->
+                        </div>
+
+                        <h4 style="margin-top: 2rem;">Experience</h4>
+                        <form id="addExperienceForm">
+                            <div class="form-group">
+                                <label for="experiencePosition">Position</label>
+                                <input type="text" id="experiencePosition" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="experienceCompany">Company</label>
+                                <input type="text" id="experienceCompany" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="experiencePeriod">Period</label>
+                                <input type="text" id="experiencePeriod" class="form-control" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Add Experience</button>
+                            </div>
+                        </form>
+                        <div class="item-list" id="experienceList">
+                            <!-- Experience list for management -->
+                        </div>
+
+                        <h4 style="margin-top: 2rem;">Skills</h4>
+                        <form id="addSkillForm">
+                            <div class="form-group">
+                                <label for="skillCategory">Category</label>
+                                <input type="text" id="skillCategory" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="skillItems">Skills (comma separated)</label>
+                                <input type="text" id="skillItems" class="form-control" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Add Skills</button>
+                            </div>
+                        </form>
+                        <div class="item-list" id="skillsList">
+                            <!-- Skills list for management -->
+                        </div>
+                    </div>
+
+                    <!-- Services Admin -->
                     <div class="admin-form" id="servicesForm">
-                        <h3>Add New Service</h3>
+                        <h3>Manage Services</h3>
                         <form id="addServiceForm">
                             <div class="form-group">
                                 <label for="serviceTitle">Service Title</label>
@@ -858,11 +1253,14 @@
                                 <button type="button" class="btn" id="loadSampleServices">Load Sample Services</button>
                             </div>
                         </form>
+                        <div class="item-list" id="servicesList">
+                            <!-- Services list for management -->
+                        </div>
                     </div>
 
-                    <!-- Blogs Admin Form -->
+                    <!-- Blogs Admin -->
                     <div class="admin-form" id="blogsForm">
-                        <h3>Add New Blog</h3>
+                        <h3>Manage Blogs</h3>
                         <form id="addBlogForm">
                             <div class="form-group">
                                 <label for="blogTitle">Blog Title</label>
@@ -889,26 +1287,56 @@
                                 <button type="button" class="btn" id="loadSampleBlogs">Load Sample Blogs</button>
                             </div>
                         </form>
+                        <div class="item-list" id="blogsList">
+                            <!-- Blogs list for management -->
+                        </div>
+                    </div>
+
+                    <!-- Reviews Admin -->
+                    <div class="admin-form" id="reviewsForm">
+                        <h3>Manage Reviews</h3>
+                        <div class="item-list" id="adminReviewsList">
+                            <!-- Reviews list for management -->
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 
+    <!-- Project Detail Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeProjectModal">&times;</button>
+            <h2 id="modalProjectTitle">Project Title</h2>
+            <div id="modalProjectContent">
+                <!-- Project details loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Certification Detail Modal -->
+    <div class="modal" id="certificationModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeCertificationModal">&times;</button>
+            <h2 id="modalCertificationTitle">Certification Title</h2>
+            <div id="modalCertificationContent">
+                <!-- Certification details loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- Blog Detail Modal -->
     <div class="modal" id="blogModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <h2 id="modalTitle">Blog Title</h2>
+            <button class="close-modal" id="closeBlogModal">&times;</button>
+            <h2 id="modalBlogTitle">Blog Title</h2>
             <div class="blog-meta">
-                <span id="modalDate">Date</span>
-                <span id="modalCategory">Category</span>
+                <span id="modalBlogDate">Date</span>
+                <span id="modalBlogCategory">Category</span>
             </div>
-            <div id="modalImage" class="blog-img" style="margin: 1.5rem 0;">
-                <i class="fas fa-image"></i>
-            </div>
-            <div id="modalContent">
-                <p>Blog content will appear here...</p>
+            <div id="modalBlogContent">
+                <!-- Blog content loaded dynamically -->
             </div>
             <div class="blog-actions" style="margin-top: 2rem;">
                 <button><i class="far fa-heart"></i> Like</button>
@@ -919,21 +1347,56 @@
     </div>
 
     <script>
-        // Content Management System
+        // Create stars for galaxy background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 200;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 3;
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                
+                star.style.left = `${left}%`;
+                star.style.top = `${top}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Enhanced Content Management System
         class PortfolioCMS {
             constructor() {
                 this.projects = [];
                 this.services = [];
                 this.blogs = [];
+                this.certifications = [];
                 this.reviews = [];
+                this.education = [];
+                this.experience = [];
+                this.skills = [];
+                this.profile = {};
+                this.adminPassword = "admin123"; // Change this to your preferred password
+                this.isAdmin = false;
                 this.init();
             }
 
             async init() {
-                // Load existing data from localStorage or use sample data
+                createStars();
                 this.loadFromStorage();
                 
-                // If no data exists, load sample data
                 if (this.projects.length === 0) {
                     this.loadSampleData();
                 }
@@ -946,25 +1409,46 @@
                 this.projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
                 this.services = JSON.parse(localStorage.getItem('portfolioServices')) || [];
                 this.blogs = JSON.parse(localStorage.getItem('portfolioBlogs')) || [];
+                this.certifications = JSON.parse(localStorage.getItem('portfolioCertifications')) || [];
                 this.reviews = JSON.parse(localStorage.getItem('portfolioReviews')) || [
                     {
+                        id: 1,
                         name: "Sarah Williams",
                         date: "June 15, 2023",
                         message: "Alex delivered exceptional insights for our marketing campaign. His data analysis helped us increase conversions by 22%."
                     },
                     {
+                        id: 2,
                         name: "Michael Chen",
                         date: "May 3, 2023",
                         message: "The predictive model Alex developed for our inventory management has saved us thousands in operational costs. Highly recommended!"
                     }
                 ];
+                this.education = JSON.parse(localStorage.getItem('portfolioEducation')) || [];
+                this.experience = JSON.parse(localStorage.getItem('portfolioExperience')) || [];
+                this.skills = JSON.parse(localStorage.getItem('portfolioSkills')) || [];
+                this.profile = JSON.parse(localStorage.getItem('portfolioProfile')) || {
+                    name: "Alex Johnson",
+                    title: "Data Scientist & Analyst",
+                    profileImage: "",
+                    coverImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                    introTitle: "Data Scientist & Analyst",
+                    introDescription: "Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization to drive business decisions.",
+                    aboutDescription: "With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets. My expertise includes machine learning, statistical modeling, data visualization, and predictive analytics.",
+                    resumeLink: "#"
+                };
             }
 
             saveToStorage() {
                 localStorage.setItem('portfolioProjects', JSON.stringify(this.projects));
                 localStorage.setItem('portfolioServices', JSON.stringify(this.services));
                 localStorage.setItem('portfolioBlogs', JSON.stringify(this.blogs));
+                localStorage.setItem('portfolioCertifications', JSON.stringify(this.certifications));
                 localStorage.setItem('portfolioReviews', JSON.stringify(this.reviews));
+                localStorage.setItem('portfolioEducation', JSON.stringify(this.education));
+                localStorage.setItem('portfolioExperience', JSON.stringify(this.experience));
+                localStorage.setItem('portfolioSkills', JSON.stringify(this.skills));
+                localStorage.setItem('portfolioProfile', JSON.stringify(this.profile));
             }
 
             loadSampleData() {
@@ -1028,25 +1512,144 @@
                     }
                 ];
 
+                // Sample certifications
+                this.certifications = [
+                    {
+                        id: 1,
+                        title: "AWS Certified Data Analytics",
+                        issuer: "Amazon Web Services",
+                        date: "January 2023",
+                        description: "Specialty certification demonstrating expertise in designing and implementing AWS services to derive value from data.",
+                        icon: "cloud"
+                    },
+                    {
+                        id: 2,
+                        title: "Google Data Analytics Professional",
+                        issuer: "Google",
+                        date: "November 2022",
+                        description: "Professional certificate covering the entire data analysis process from data cleaning to visualization and presentation.",
+                        icon: "google"
+                    }
+                ];
+
+                // Sample education
+                this.education = [
+                    {
+                        id: 1,
+                        degree: "MSc Data Science",
+                        institution: "Stanford University",
+                        period: "2018-2020"
+                    },
+                    {
+                        id: 2,
+                        degree: "BSc Computer Science",
+                        institution: "UC Berkeley",
+                        period: "2014-2018"
+                    }
+                ];
+
+                // Sample experience
+                this.experience = [
+                    {
+                        id: 1,
+                        position: "Senior Data Scientist",
+                        company: "TechCorp Inc.",
+                        period: "2020-Present"
+                    },
+                    {
+                        id: 2,
+                        position: "Data Analyst",
+                        company: "DataInsights LLC",
+                        period: "2018-2020"
+                    }
+                ];
+
+                // Sample skills
+                this.skills = [
+                    {
+                        id: 1,
+                        category: "Programming",
+                        items: ["Python", "R", "SQL", "JavaScript"]
+                    },
+                    {
+                        id: 2,
+                        category: "ML Libraries",
+                        items: ["Scikit-learn", "TensorFlow", "PyTorch"]
+                    }
+                ];
+
                 this.saveToStorage();
             }
 
             renderAll() {
+                this.renderProfile();
                 this.renderProjects();
                 this.renderServices();
                 this.renderBlogs();
+                this.renderCertifications();
                 this.renderReviews();
+                this.renderResume();
+                this.renderAdminLists();
+            }
+
+            renderProfile() {
+                // Update profile information
+                document.getElementById('profileName').textContent = this.profile.name;
+                document.getElementById('profileTitle').textContent = this.profile.title;
+                document.getElementById('introTitle').textContent = this.profile.introTitle;
+                document.getElementById('introDescription').textContent = this.profile.introDescription;
+                document.getElementById('aboutDescription').textContent = this.profile.aboutDescription;
+                document.getElementById('resumeDownloadLink').href = this.profile.resumeLink;
+
+                // Update profile image
+                const profileImg = document.getElementById('profileImage');
+                if (this.profile.profileImage) {
+                    profileImg.innerHTML = `<img src="${this.profile.profileImage}" alt="${this.profile.name}">`;
+                } else {
+                    profileImg.innerHTML = `<i class="fas fa-user"></i>`;
+                }
+
+                // Update cover image
+                const homeSection = document.getElementById('homeSection');
+                if (this.profile.coverImage) {
+                    homeSection.style.setProperty('--cover-image', `url('${this.profile.coverImage}')`);
+                }
+
+                // Update personal info
+                const personalInfo = document.getElementById('personalInfo');
+                personalInfo.innerHTML = `
+                    <div class="info-item">
+                        <span>Name:</span>
+                        <span>${this.profile.name}</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Age:</span>
+                        <span>28</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Location:</span>
+                        <span>San Francisco, CA</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Degree:</span>
+                        <span>MSc Data Science</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Email:</span>
+                        <span>alex.johnson@example.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Phone:</span>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                `;
             }
 
             renderProjects() {
                 const projectsGrid = document.getElementById('projectsGrid');
-                const detailsContainer = document.getElementById('projectDetailsContainer');
-                
                 projectsGrid.innerHTML = '';
-                detailsContainer.innerHTML = '';
 
                 this.projects.forEach(project => {
-                    // Create project card
                     const projectCard = document.createElement('div');
                     projectCard.className = 'project-card';
                     projectCard.innerHTML = `
@@ -1060,22 +1663,29 @@
                         </div>
                     `;
                     projectsGrid.appendChild(projectCard);
+                });
+            }
 
-                    // Create project detail
-                    const projectDetail = document.createElement('div');
-                    projectDetail.id = `project-detail-${project.id}`;
-                    projectDetail.className = 'project-detail';
-                    projectDetail.innerHTML = `
-                        <h3>${project.title} - Project Details</h3>
-                        <p>${project.description}</p>
-                        <h4>Technologies Used:</h4>
-                        <ul>
-                            ${project.technologies.map(tech => `<li>${tech}</li>`).join('')}
-                        </ul>
-                        <h4>Results:</h4>
-                        <p>${project.results}</p>
+            renderCertifications() {
+                const certificationsGrid = document.getElementById('certificationsGrid');
+                certificationsGrid.innerHTML = '';
+
+                this.certifications.forEach(certification => {
+                    const certificationCard = document.createElement('div');
+                    certificationCard.className = 'certification-card';
+                    certificationCard.innerHTML = `
+                        <div class="certification-img">
+                            <i class="fas fa-${certification.icon}"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>${certification.title}</h3>
+                            <p><strong>Issuer:</strong> ${certification.issuer}</p>
+                            <p><strong>Date:</strong> ${certification.date}</p>
+                            <p>${certification.description}</p>
+                            <button class="btn open-certification" data-certification="${certification.id}">View Details</button>
+                        </div>
                     `;
-                    detailsContainer.appendChild(projectDetail);
+                    certificationsGrid.appendChild(certificationCard);
                 });
             }
 
@@ -1118,7 +1728,7 @@
                             <div class="blog-actions">
                                 <button><i class="far fa-heart"></i> ${blog.likes}</button>
                                 <button><i class="far fa-comment"></i> ${blog.comments}</button>
-                                <button><i class="fas fa-share"></i> Share</button>
+                                <button class="open-blog" data-blog="${blog.id}"><i class="fas fa-share"></i> Read More</button>
                             </div>
                         </div>
                     `;
@@ -1144,6 +1754,188 @@
                 });
             }
 
+            renderResume() {
+                // Education
+                const educationSection = document.getElementById('educationSection');
+                educationSection.innerHTML = '<h3>Education</h3>';
+                this.education.forEach(edu => {
+                    const eduItem = document.createElement('div');
+                    eduItem.className = 'info-item';
+                    eduItem.innerHTML = `
+                        <span>${edu.degree}</span>
+                        <span>${edu.institution}, ${edu.period}</span>
+                    `;
+                    educationSection.appendChild(eduItem);
+                });
+
+                // Experience
+                const experienceSection = document.getElementById('experienceSection');
+                experienceSection.innerHTML = '<h3>Experience</h3>';
+                this.experience.forEach(exp => {
+                    const expItem = document.createElement('div');
+                    expItem.className = 'info-item';
+                    expItem.innerHTML = `
+                        <span>${exp.position}</span>
+                        <span>${exp.company}, ${exp.period}</span>
+                    `;
+                    experienceSection.appendChild(expItem);
+                });
+
+                // Skills
+                const skillsSection = document.getElementById('skillsSection');
+                skillsSection.innerHTML = '<h3>Skills</h3>';
+                this.skills.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'info-item';
+                    skillItem.innerHTML = `
+                        <span>${skill.category}:</span>
+                        <span>${skill.items.join(', ')}</span>
+                    `;
+                    skillsSection.appendChild(skillItem);
+                });
+            }
+
+            renderAdminLists() {
+                if (!this.isAdmin) return;
+
+                // Projects list
+                const projectsList = document.getElementById('projectsList');
+                projectsList.innerHTML = '';
+                this.projects.forEach(project => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${project.title}</h4>
+                        <p>${project.description.substring(0, 100)}...</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="project" data-id="${project.id}">Edit</button>
+                            <button class="btn delete-item" data-type="project" data-id="${project.id}">Delete</button>
+                        </div>
+                    `;
+                    projectsList.appendChild(itemCard);
+                });
+
+                // Certifications list
+                const certificationsList = document.getElementById('certificationsList');
+                certificationsList.innerHTML = '';
+                this.certifications.forEach(cert => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${cert.title}</h4>
+                        <p>${cert.issuer} - ${cert.date}</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="certification" data-id="${cert.id}">Edit</button>
+                            <button class="btn delete-item" data-type="certification" data-id="${cert.id}">Delete</button>
+                        </div>
+                    `;
+                    certificationsList.appendChild(itemCard);
+                });
+
+                // Services list
+                const servicesList = document.getElementById('servicesList');
+                servicesList.innerHTML = '';
+                this.services.forEach(service => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${service.title}</h4>
+                        <p>${service.description.substring(0, 100)}...</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="service" data-id="${service.id}">Edit</button>
+                            <button class="btn delete-item" data-type="service" data-id="${service.id}">Delete</button>
+                        </div>
+                    `;
+                    servicesList.appendChild(itemCard);
+                });
+
+                // Blogs list
+                const blogsList = document.getElementById('blogsList');
+                blogsList.innerHTML = '';
+                this.blogs.forEach(blog => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${blog.title}</h4>
+                        <p>${blog.date} - ${blog.category}</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="blog" data-id="${blog.id}">Edit</button>
+                            <button class="btn delete-item" data-type="blog" data-id="${blog.id}">Delete</button>
+                        </div>
+                    `;
+                    blogsList.appendChild(itemCard);
+                });
+
+                // Education list
+                const educationList = document.getElementById('educationList');
+                educationList.innerHTML = '';
+                this.education.forEach(edu => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${edu.degree}</h4>
+                        <p>${edu.institution} - ${edu.period}</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="education" data-id="${edu.id}">Edit</button>
+                            <button class="btn delete-item" data-type="education" data-id="${edu.id}">Delete</button>
+                        </div>
+                    `;
+                    educationList.appendChild(itemCard);
+                });
+
+                // Experience list
+                const experienceList = document.getElementById('experienceList');
+                experienceList.innerHTML = '';
+                this.experience.forEach(exp => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${exp.position}</h4>
+                        <p>${exp.company} - ${exp.period}</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="experience" data-id="${exp.id}">Edit</button>
+                            <button class="btn delete-item" data-type="experience" data-id="${exp.id}">Delete</button>
+                        </div>
+                    `;
+                    experienceList.appendChild(itemCard);
+                });
+
+                // Skills list
+                const skillsList = document.getElementById('skillsList');
+                skillsList.innerHTML = '';
+                this.skills.forEach(skill => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${skill.category}</h4>
+                        <p>${skill.items.join(', ')}</p>
+                        <div class="item-actions">
+                            <button class="btn edit-item" data-type="skill" data-id="${skill.id}">Edit</button>
+                            <button class="btn delete-item" data-type="skill" data-id="${skill.id}">Delete</button>
+                        </div>
+                    `;
+                    skillsList.appendChild(itemCard);
+                });
+
+                // Reviews list
+                const adminReviewsList = document.getElementById('adminReviewsList');
+                adminReviewsList.innerHTML = '';
+                this.reviews.forEach(review => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.innerHTML = `
+                        <h4>${review.name}</h4>
+                        <p>${review.date}</p>
+                        <p>${review.message}</p>
+                        <div class="item-actions">
+                            <button class="btn delete-item" data-type="review" data-id="${review.id}">Delete</button>
+                        </div>
+                    `;
+                    adminReviewsList.appendChild(itemCard);
+                });
+            }
+
+            // CRUD Operations
             addProject(projectData) {
                 const newProject = {
                     id: this.projects.length > 0 ? Math.max(...this.projects.map(p => p.id)) + 1 : 1,
@@ -1152,6 +1944,7 @@
                 this.projects.push(newProject);
                 this.saveToStorage();
                 this.renderProjects();
+                this.renderAdminLists();
             }
 
             addService(serviceData) {
@@ -1162,6 +1955,7 @@
                 this.services.push(newService);
                 this.saveToStorage();
                 this.renderServices();
+                this.renderAdminLists();
             }
 
             addBlog(blogData) {
@@ -1174,10 +1968,23 @@
                 this.blogs.push(newBlog);
                 this.saveToStorage();
                 this.renderBlogs();
+                this.renderAdminLists();
+            }
+
+            addCertification(certData) {
+                const newCert = {
+                    id: this.certifications.length > 0 ? Math.max(...this.certifications.map(c => c.id)) + 1 : 1,
+                    ...certData
+                };
+                this.certifications.push(newCert);
+                this.saveToStorage();
+                this.renderCertifications();
+                this.renderAdminLists();
             }
 
             addReview(reviewData) {
                 const newReview = {
+                    id: this.reviews.length > 0 ? Math.max(...this.reviews.map(r => r.id)) + 1 : 1,
                     ...reviewData,
                     date: new Date().toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -1188,182 +1995,78 @@
                 this.reviews.unshift(newReview);
                 this.saveToStorage();
                 this.renderReviews();
+                this.renderAdminLists();
+            }
+
+            addEducation(eduData) {
+                const newEdu = {
+                    id: this.education.length > 0 ? Math.max(...this.education.map(e => e.id)) + 1 : 1,
+                    ...eduData
+                };
+                this.education.push(newEdu);
+                this.saveToStorage();
+                this.renderResume();
+                this.renderAdminLists();
+            }
+
+            addExperience(expData) {
+                const newExp = {
+                    id: this.experience.length > 0 ? Math.max(...this.experience.map(e => e.id)) + 1 : 1,
+                    ...expData
+                };
+                this.experience.push(newExp);
+                this.saveToStorage();
+                this.renderResume();
+                this.renderAdminLists();
+            }
+
+            addSkill(skillData) {
+                const newSkill = {
+                    id: this.skills.length > 0 ? Math.max(...this.skills.map(s => s.id)) + 1 : 1,
+                    ...skillData
+                };
+                this.skills.push(newSkill);
+                this.saveToStorage();
+                this.renderResume();
+                this.renderAdminLists();
+            }
+
+            deleteItem(type, id) {
+                switch(type) {
+                    case 'project':
+                        this.projects = this.projects.filter(p => p.id !== id);
+                        break;
+                    case 'service':
+                        this.services = this.services.filter(s => s.id !== id);
+                        break;
+                    case 'blog':
+                        this.blogs = this.blogs.filter(b => b.id !== id);
+                        break;
+                    case 'certification':
+                        this.certifications = this.certifications.filter(c => c.id !== id);
+                        break;
+                    case 'review':
+                        this.reviews = this.reviews.filter(r => r.id !== id);
+                        break;
+                    case 'education':
+                        this.education = this.education.filter(e => e.id !== id);
+                        break;
+                    case 'experience':
+                        this.experience = this.experience.filter(e => e.id !== id);
+                        break;
+                    case 'skill':
+                        this.skills = this.skills.filter(s => s.id !== id);
+                        break;
+                }
+                this.saveToStorage();
+                this.renderAll();
+            }
+
+            updateProfile(profileData) {
+                this.profile = { ...this.profile, ...profileData };
+                this.saveToStorage();
+                this.renderProfile();
             }
 
             setupEventListeners() {
-                // Admin form submissions
-                document.getElementById('addProjectForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.target);
-                    this.addProject({
-                        title: document.getElementById('projectTitle').value,
-                        description: document.getElementById('projectDescription').value,
-                        icon: document.getElementById('projectIcon').value.replace('fas fa-', ''),
-                        technologies: document.getElementById('projectTechnologies').value.split(',').map(t => t.trim()),
-                        results: document.getElementById('projectResults').value
-                    });
-                    e.target.reset();
-                    alert('Project added successfully!');
-                });
-
-                document.getElementById('addServiceForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.addService({
-                        title: document.getElementById('serviceTitle').value,
-                        description: document.getElementById('serviceDescription').value,
-                        icon: document.getElementById('serviceIcon').value.replace('fas fa-', '')
-                    });
-                    e.target.reset();
-                    alert('Service added successfully!');
-                });
-
-                document.getElementById('addBlogForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.addBlog({
-                        title: document.getElementById('blogTitle').value,
-                        description: document.getElementById('blogDescription').value,
-                        date: document.getElementById('blogDate').value,
-                        category: document.getElementById('blogCategory').value,
-                        icon: document.getElementById('blogIcon').value.replace('fas fa-', '')
-                    });
-                    e.target.reset();
-                    alert('Blog added successfully!');
-                });
-
-                // Sample data buttons
-                document.getElementById('loadSampleProjects').addEventListener('click', () => {
-                    this.loadSampleData();
-                    this.renderAll();
-                    alert('Sample projects loaded!');
-                });
-
-                document.getElementById('loadSampleServices').addEventListener('click', () => {
-                    this.loadSampleData();
-                    this.renderAll();
-                    alert('Sample services loaded!');
-                });
-
-                document.getElementById('loadSampleBlogs').addEventListener('click', () => {
-                    this.loadSampleData();
-                    this.renderAll();
-                    alert('Sample blogs loaded!');
-                });
-
-                // Admin tabs
-                document.querySelectorAll('.admin-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-                        document.querySelectorAll('.admin-form').forEach(f => f.classList.remove('active'));
-                        
-                        tab.classList.add('active');
-                        document.getElementById(`${tab.dataset.tab}Form`).classList.add('active');
-                    });
-                });
-            }
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            const cms = new PortfolioCMS();
-            
-            // Navigation functionality
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.section');
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            
-            // Navigation click handler
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links and sections
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    sections.forEach(section => section.classList.remove('active'));
-                    
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    
-                    // Show corresponding section
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).classList.add('active');
-                    
-                    // Close sidebar on mobile after navigation
-                    if (window.innerWidth <= 992) {
-                        sidebar.classList.remove('active');
-                    }
-                });
-            });
-            
-            // Mobile menu toggle
-            menuToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('active');
-            });
-            
-            // Review form submission
-            const reviewForm = document.getElementById('reviewForm');
-            
-            reviewForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('reviewerName').value;
-                const message = document.getElementById('reviewMessage').value;
-                
-                if (name && message) {
-                    cms.addReview({ name, message });
-                    reviewForm.reset();
-                    alert('Thank you for your review!');
-                }
-            });
-            
-            // Project detail functionality
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('open-project')) {
-                    const projectId = e.target.getAttribute('data-project');
-                    const projectDetail = document.getElementById(`project-detail-${projectId}`);
-                    
-                    // Hide all project details
-                    document.querySelectorAll('.project-detail').forEach(detail => {
-                        detail.classList.remove('active');
-                    });
-                    
-                    // Show selected project detail
-                    projectDetail.classList.add('active');
-                    
-                    // Scroll to project detail
-                    projectDetail.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-            
-            // Blog modal functionality
-            const blogModal = document.getElementById('blogModal');
-            const closeModal = document.getElementById('closeModal');
-            const blogCards = document.querySelectorAll('.blog-card');
-            
-            blogCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const title = this.querySelector('h3').textContent;
-                    const date = this.querySelector('.blog-meta span:first-child').textContent;
-                    const category = this.querySelector('.blog-meta span:last-child').textContent;
-                    
-                    document.getElementById('modalTitle').textContent = title;
-                    document.getElementById('modalDate').textContent = date;
-                    document.getElementById('modalCategory').textContent = category;
-                    
-                    blogModal.style.display = 'block';
-                });
-            });
-            
-            closeModal.addEventListener('click', function() {
-                blogModal.style.display = 'none';
-            });
-            
-            window.addEventListener('click', function(e) {
-                if (e.target === blogModal) {
-                    blogModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                //
