@@ -1,0 +1,28 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "title": "Data Analysis",
+      "description": "Comprehensive data analysis to uncover patterns, trends, and insights that drive business decisions.",
+      "icon": "chart-bar"
+    },
+    {
+      "id": 2,
+      "title": "Machine Learning",
+      "description": "Development and deployment of machine learning models for prediction, classification, and optimization.",
+      "icon": "brain"
+    },
+    {
+      "id": 3,
+      "title": "Data Engineering",
+      "description": "Building robust data pipelines and infrastructure to support analytics and machine learning workflows.",
+      "icon": "database"
+    },
+    {
+      "id": 4,
+      "title": "Data Visualization",
+      "description": "Creating interactive dashboards and visualizations to communicate complex data in an intuitive way.",
+      "icon": "eye"
+    }
+  ]
+}

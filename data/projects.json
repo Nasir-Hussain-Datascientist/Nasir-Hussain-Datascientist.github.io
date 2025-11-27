@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Customer Segmentation",
+      "description": "Used clustering algorithms to segment customers based on purchasing behavior, resulting in a 15% increase in marketing campaign effectiveness.",
+      "image": "",
+      "icon": "chart-line",
+      "technologies": ["Python", "Scikit-learn", "Tableau"],
+      "results": "Increased conversion rates by 15%"
+    },
+    {
+      "id": 2,
+      "title": "Predictive Maintenance",
+      "description": "Developed a machine learning model to predict equipment failures, reducing downtime by 30% and saving $500k annually in maintenance costs.",
+      "image": "",
+      "icon": "robot",
+      "technologies": ["Python", "TensorFlow", "AWS"],
+      "results": "Reduced downtime by 30%, saved $500k annually"
+    },
+    {
+      "id": 3,
+      "title": "Sales Forecasting",
+      "description": "Built a time series forecasting model to predict product demand, improving inventory management and reducing stockouts by 25%.",
+      "image": "",
+      "icon": "shopping-cart",
+      "technologies": ["Python", "Prophet", "Pandas"],
+      "results": "Reduced stockouts by 25%"
+    }
+  ]
+}

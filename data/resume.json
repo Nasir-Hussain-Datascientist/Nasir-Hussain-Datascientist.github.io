@@ -1,0 +1,47 @@
+{
+  "education": [
+    {
+      "id": 1,
+      "degree": "MSc Data Science",
+      "institution": "Stanford University",
+      "period": "2018-2020"
+    },
+    {
+      "id": 2,
+      "degree": "BSc Computer Science",
+      "institution": "UC Berkeley",
+      "period": "2014-2018"
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "position": "Senior Data Scientist",
+      "company": "TechCorp Inc.",
+      "period": "2020-Present"
+    },
+    {
+      "id": 2,
+      "position": "Data Analyst",
+      "company": "DataInsights LLC",
+      "period": "2018-2020"
+    }
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "category": "Programming",
+      "items": ["Python", "R", "SQL", "JavaScript"]
+    },
+    {
+      "id": 2,
+      "category": "ML Libraries",
+      "items": ["Scikit-learn", "TensorFlow", "PyTorch"]
+    },
+    {
+      "id": 3,
+      "category": "Data Visualization",
+      "items": ["Tableau", "Power BI", "Matplotlib", "D3.js"]
+    }
+  ]
+}
