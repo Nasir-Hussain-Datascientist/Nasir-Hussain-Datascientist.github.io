@@ -5,27 +5,46 @@
       "title": "ETL and Data Pipelines with Shell, Airflow and Kafka",
       "issuer": "IBM",
       "date": "OCT 2024",
-      "description": "Completed IBM’s ETL and Data Pipelines course, learning how to design ETL/ELT workflows, automate tasks with bash and Python, and manage batch vs concurrent execution. Gained practical experience with Airflow, data pipeline components, and Kafka for scalable data processing",
+      "description": "Completed IBM’s ETL and Data Pipelines course, gaining experience in ETL/ELT design, automation with bash/Python, and scalable pipeline orchestration using Airflow and Kafka.",
       "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/ETL_and_Data_Pipelines_with_Shell__Airflow_and_Kafka_Badge20241009-7-jp73ob_page1.png?raw=true",
       "icon": "cloud",
       "link": "https://www.coursera.org/account/accomplishments/verify/C6NIW3JV4SES"
     },
     {
-      "id": 2,
-      "title": "Google Data Analytics Professional",
-      "issuer": "Google",
-      "date": "November 2022",
-      "description": "Professional certificate covering the entire data analysis process from data cleaning to visualization and presentation.",
-      "image": "",
+      "id": 2
+      ,
+      "title": "Exploratory Data Analysis in AWS",
+      "issuer": "WHIZLABS",
+      "date": "November 2024",
+      "description": "Completed Whizlabs’ EDA in AWS, gaining experience with data analysis for ML, real-time processing using Kinesis, and building ETL workflows with AWS Glue, S3, and Redshift.",
+      "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/Exploratory%20data%20analysisCoursera%201KSU6QZNA9FT_page1.png?raw=true",
       "icon": "google"
     },
     {
-      "id": 3,
-      "title": "Microsoft Certified: Azure Data Scientist",
+      "id":3 ,
+      "title": "Microsoft Azure Management Tools and Security Solutions",
       "issuer": "Microsoft",
-      "date": "September 2022",
-      "description": "Certification demonstrating skills in implementing and running machine learning workloads on Azure.",
-      "image": "",
+      "date": "December 2024",
+      "description": "Completed Microsoft’s Azure Management Tools and Security Solutions course, gaining experience with Azure management services, AI and IoT solution selection, and core cloud security capabilities including firewalls, DDoS protection, and application security. ",
+      "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/Microsoft%20Azure%20Management%20Tools.PNG?raw=true",
+      "icon": "microsoft"
+    },
+    {
+      "id": 4,
+      "title": "Machine Learning Implementation and Operations in AWS",
+      "issuer": "WHIZLABS",
+      "date": "November 2024",
+      "description": " Completed Whizlabs’ Machine Learning Implementation and Operations in AWS, gaining experience in designing scalable and resilient ML solutions, applying AWS ML services like SageMaker, and implementing secure, production-ready MLOps workflows.",
+      "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/Machine%20Learning%20Implementation%20and%20Operations_page1.png?raw=true",
+      "icon": "microsoft"
+    },
+    {
+      "id": 5,
+      "title": "Introduction to Microsoft Azure Cloud Services",
+      "issuer": "Microsoft",
+      "date": "December 2024",
+      "description": "Completed Microsoft’s Introduction to Azure Cloud Services, gaining foundational knowledge of cloud concepts, core Azure services, architecture components, virtualization, storage, networking, and cloud infrastructure fundamentals. ",
+      "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/Introduction%20to%20Microsoft%20Azure%20Cloud%20Services.PNG?raw=true",
       "icon": "microsoft"
     }
   ]
