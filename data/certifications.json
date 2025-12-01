@@ -7,7 +7,8 @@
       "date": "OCT 2024",
       "description": "Completed IBM’s ETL and Data Pipelines course, learning how to design ETL/ELT workflows, automate tasks with bash and Python, and manage batch vs concurrent execution. Gained practical experience with Airflow, data pipeline components, and Kafka for scalable data processing",
       "image": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~C6NIW3JV4SES/CERTIFICATE_LANDING_PAGE~C6NIW3JV4SES.jpeg",
-      "icon": "cloud"
+      "icon": "cloud",
+      "link": "https://www.coursera.org/account/accomplishments/verify/C6NIW3JV4SES"
     },
     {
       "id": 2,
