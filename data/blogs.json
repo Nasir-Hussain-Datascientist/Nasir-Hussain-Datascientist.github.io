@@ -3,35 +3,12 @@
     {
       "id": 1,
       "title": "The Future of AI in Healthcare",
-      "description": "Exploring how artificial intelligence is transforming diagnostics, treatment planning, and patient care in the healthcare industry.",
+      "description": "Exploring how artificial intelligence is transforming healthcare...",
+      "fullContent": "<p>This is the COMPLETE blog article with detailed content.</p><p>You can write multiple paragraphs here with proper formatting.</p><p>Add images, code snippets, and explanations as needed.</p>",
       "image": "",
       "icon": "chart-pie",
       "date": "June 10, 2023",
-      "category": "Data Science",
-      "likes": 24,
-      "comments": 8
-    },
-    {
-      "id": 2,
-      "title": "Understanding Neural Networks",
-      "description": "A deep dive into how neural networks work, from basic perceptrons to complex architectures like CNNs and RNNs.",
-      "image": "",
-      "icon": "network-wired",
-      "date": "May 22, 2023",
-      "category": "Machine Learning",
-      "likes": 42,
-      "comments": 15
-    },
-    {
-      "id": 3,
-      "title": "Best Practices for Data Dashboards",
-      "description": "Key principles for designing effective data dashboards that communicate insights clearly and drive action.",
-      "image": "",
-      "icon": "table",
-      "date": "April 15, 2023",
-      "category": "Data Visualization",
-      "likes": 31,
-      "comments": 12
+      "category": "Data Science"
     }
   ]
 }

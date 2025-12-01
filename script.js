@@ -153,12 +153,11 @@ class PortfolioCMS {
                     id: 1,
                     title: "The Future of AI in Healthcare",
                     description: "Exploring how AI is transforming healthcare industry.",
+                    fullContent: "<h3>Complete Blog Article</h3><p>This is the full content of the blog article. You can add detailed explanations, multiple paragraphs, and rich content here.</p><p>To update this content, edit the 'fullContent' field in your blogs.json file.</p>",
                     image: "",
                     icon: "chart-pie",
                     date: "June 10, 2023",
-                    category: "Data Science",
-                    likes: 24,
-                    comments: 8
+                    category: "Data Science"
                 }
             ],
             certifications: [
@@ -304,8 +303,6 @@ class PortfolioCMS {
                         <p><strong>Date:</strong> ${cert.date}</p>
                         <p>${cert.description}</p>
                         <button class="btn" onclick="window.open('${cert.link || '#'}', '_blank'); return false;">View Certificate</button>
-                        
-                        
                     </div>
                 </div>
             `).join('');
@@ -344,19 +341,115 @@ class PortfolioCMS {
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span>${blog.date}</span>
-                            <span>${blog.category}</span>
+                            <span><i class="far fa-calendar"></i> ${blog.date}</span>
+                            <span><i class="fas fa-tag"></i> ${blog.category}</span>
                         </div>
                         <h3>${blog.title}</h3>
-                        <p>${blog.description}</p>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">${blog.description}</p>
                         <div class="blog-actions">
-                            <button><i class="far fa-heart"></i> ${blog.likes}</button>
-                            <button><i class="far fa-comment"></i> ${blog.comments}</button>
-                            <button class="open-blog" data-blog="${blog.id}"><i class="fas fa-share"></i> Read More</button>
+                            <button class="btn read-more-btn" data-blog-id="${blog.id}">
+                                <i class="fas fa-book-open"></i> Read Full Article
+                            </button>
                         </div>
                     </div>
                 </div>
             `).join('');
+
+        // Setup blog buttons after rendering
+        this.setupBlogButtons();
+    }
+
+    setupBlogButtons() {
+        document.querySelectorAll('.read-more-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const blogId = parseInt(button.getAttribute('data-blog-id'));
+                const blog = this.data.blogs.find(b => b.id === blogId);
+                
+                if (blog) {
+                    this.showBlogDetail(blog);
+                }
+            });
+        });
+    }
+
+    showBlogDetail(blog) {
+        // Create or show blog detail modal
+        let blogModal = document.getElementById('blogDetailModal');
+        
+        if (!blogModal) {
+            // Create modal if it doesn't exist
+            blogModal = document.createElement('div');
+            blogModal.id = 'blogDetailModal';
+            blogModal.className = 'modal';
+            blogModal.innerHTML = `
+                <div class="modal-content" style="max-width: 900px; padding: 3rem;">
+                    <button class="close-modal" id="closeBlogDetailModal" style="background: none; border: none; font-size: 1.8rem; color: var(--text-muted); position: absolute; top: 20px; right: 20px; cursor: pointer;">&times;</button>
+                    <div id="blogDetailContent" style="margin-top: 1rem;"></div>
+                </div>
+            `;
+            document.body.appendChild(blogModal);
+            
+            // Add close event
+            document.getElementById('closeBlogDetailModal').addEventListener('click', () => {
+                blogModal.style.display = 'none';
+            });
+            
+            // Close when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === blogModal) {
+                    blogModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Populate blog content
+        document.getElementById('blogDetailContent').innerHTML = `
+            <div class="blog-detail-header" style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--galaxy-purple);">${blog.title}</h2>
+                <div class="blog-meta" style="display: flex; justify-content: center; gap: 2rem; color: var(--text-muted); font-size: 0.95rem;">
+                    <span><i class="far fa-calendar"></i> ${blog.date}</span>
+                    <span><i class="fas fa-tag"></i> ${blog.category}</span>
+                </div>
+            </div>
+            
+            <div class="blog-detail-image" style="margin: 2.5rem 0;">
+                ${blog.image ?
+                    `<img src="${blog.image}" alt="${blog.title}" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">` :
+                    `<div style="background: linear-gradient(45deg, var(--galaxy-purple), var(--galaxy-blue)); height: 350px; border-radius: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);">
+                        <i class="fas fa-${blog.icon}" style="font-size: 5rem; color: white;"></i>
+                    </div>`
+                }
+            </div>
+            
+            <div class="blog-detail-content" style="font-size: 1.1rem; line-height: 1.8;">
+                <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 15px; border-left: 5px solid var(--galaxy-purple); margin-bottom: 2rem;">
+                    <h3 style="color: var(--galaxy-purple); margin-bottom: 1.5rem; font-size: 1.5rem;">Article Summary</h3>
+                    <p style="color: var(--text-color); font-size: 1.15rem; line-height: 1.7;">${blog.description}</p>
+                </div>
+                
+                <div style="background: var(--darker-bg); padding: 2.5rem; border-radius: 15px; margin-top: 2rem;">
+                    <h3 style="color: var(--galaxy-purple); margin-bottom: 1.5rem; font-size: 1.5rem;">Full Article</h3>
+                    <div style="color: var(--text-color); line-height: 1.8; font-size: 1.1rem;">
+                        ${blog.fullContent || 
+                            `<p>This is where your full blog article would appear. To add full content, update your <code>blogs.json</code> file and add a "fullContent" field with your complete article text.</p>
+                             <p>Example in JSON:</p>
+                             <pre style="background: var(--dark-bg); padding: 1rem; border-radius: 8px; overflow-x: auto;">
+"fullContent": "Your complete blog article here with paragraphs, images, and detailed explanations..."</pre>`
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center;">
+                <button class="btn" onclick="document.getElementById('blogDetailModal').style.display='none'" style="background: var(--card-bg); border: 1px solid var(--border-color);">
+                    <i class="fas fa-arrow-left"></i> Back to All Blogs
+                </button>
+            </div>
+        `;
+        
+        // Show the modal
+        blogModal.style.display = 'block';
     }
 
     renderResume() {
@@ -480,8 +573,7 @@ class PortfolioCMS {
     addBlog(blogData) {
         const newBlog = {
             id: this.data.blogs.length > 0 ? Math.max(...this.data.blogs.map(b => b.id)) + 1 : 1,
-            likes: 0,
-            comments: 0,
+            fullContent: blogData.fullContent || '',
             ...blogData
         };
         this.data.blogs.push(newBlog);
@@ -697,6 +789,7 @@ class PortfolioCMS {
             this.addBlog({
                 title: document.getElementById('blogTitle').value,
                 description: document.getElementById('blogDescription').value,
+                fullContent: document.getElementById('blogFullContent') ? document.getElementById('blogFullContent').value : '',
                 date: document.getElementById('blogDate').value,
                 category: document.getElementById('blogCategory').value,
                 image: document.getElementById('blogImage').value,
