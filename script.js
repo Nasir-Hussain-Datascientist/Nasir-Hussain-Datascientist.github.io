@@ -303,7 +303,9 @@ class PortfolioCMS {
                         <p><strong>Issuer:</strong> ${cert.issuer}</p>
                         <p><strong>Date:</strong> ${cert.date}</p>
                         <p>${cert.description}</p>
-                        <button class="btn open-certification" data-certification="${cert.id}">View Details</button>
+                        <button class="btn" onclick="window.open('${cert.link || '#'}', '_blank'); return false;">View Certificate</button>
+                        
+                        
                     </div>
                 </div>
             `).join('');
