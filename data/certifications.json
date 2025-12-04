@@ -53,7 +53,7 @@
       "issuer": "Microsoft",
       "date": "December 2024",
       "description": "Completed Microsoft’s Azure Services and Lifecycles course, gaining understanding of cloud governance, cost management, compliance standards, SLAs, and how these factors influence secure and well-designed Azure applications.",
-      "image": "images/Microsoft Azure Services and Lifecycles.PNG",
+      "image": "data/images/Microsoft Azure Services and Lifecycles.PNG",
       "icon": "microsoft"
     }
     
