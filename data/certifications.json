@@ -46,6 +46,17 @@
       "description": "Completed Microsoft’s Introduction to Azure Cloud Services, gaining foundational knowledge of cloud concepts, core Azure services, architecture components, virtualization, storage, networking, and cloud infrastructure fundamentals. ",
       "image": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/converted_pngs/Introduction%20to%20Microsoft%20Azure%20Cloud%20Services.PNG?raw=true",
       "icon": "microsoft"
+    },
+     {
+      "id":6 ,
+      "title": "Microsoft Azure Services and Lifecycles",
+      "issuer": "Microsoft",
+      "date": "December 2024",
+      "description": "Completed Microsoft’s Azure Services and Lifecycles course, gaining understanding of cloud governance, cost management, compliance standards, SLAs, and how these factors influence secure and well-designed Azure applications.",
+      "image": "",
+      "icon": "microsoft"
     }
+    
+   
   ]
 }
