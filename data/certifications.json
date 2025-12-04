@@ -91,8 +91,127 @@
       "icon": "microsoft",
         "link": "http://coursera.org/account/accomplishments/verify/K6VFQ55M4QKP"
 
-    }
+    },
+
+    {
+      "id":10 ,
+      "title": "Programming Essentials in Python",
+      "issuer": "CISCO",
+      "date": "June 2024",
+      "description":"Completed the PCAP – Programming Essentials in Python course, gaining a solid foundation in Python programming, including variables, data structures, functions, control flow, and problem-solving for real-world applications.",
+      "image": "data/images/NasirHussain-Certified Associ-certificate_page1.png",
+      "icon": "microsoft",
+        "link": "https://www.netacad.com/certificates/?issuanceId=7124b27f-1163-4385-9c43-e5e1b59b2566"
+    },
+    {
+      "id":11 ,
+      "title" : "Data Science with R Programming",
+      "issuer": "Simplilearn|Skillup",
+      "date": "August 2023",
+      "description": "Completed a Data Science with R Programming course, developing skills in data cleaning, manipulation, visualization, and statistical analysis using R, along with hands-on practice applying data science workflows to real datasets.",
+      "image": "data/images/datascience with R programming_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/sX2eJgwlPYb"
+    },
     
-   
+    {
+      "id": 12,
+      "title" : "Power BI",
+      "issuer": "Simplilearn|Skillup",
+      "date": "September 2023",
+      "description": "Completed a Power BI for Beginners course, learning how to prepare data, build interactive dashboards, create DAX calculations, and develop clear visual reports for data-driven insights.",
+      "image": "data/images/power bi_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/6kPnFQGlPYb"
+    },
+    
+    {
+      "id": 13,
+      "title" : "Data Science with Python",
+      "issuer": "Simplilearn|Skillup",
+      "date": "September 2023",
+      "description": "Gained practical experience in Python data science, using key libraries to clean data, analyze patterns, and build basic machine-learning models.",
+      "image": "data/images/datascience with python_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/jnNbKoEmPYb"
+    },
+    
+    {
+      "id":14 ,
+      "title" : "Python Libraries for Data Science",
+      "issuer": "Simplilearn|Skillup",
+      "date": "September 2023",
+      "description": "Learned to work with essential Python libraries for data science, using tools like NumPy, Pandas, Matplotlib, and Scikit-learn to handle data, explore trends, and support analytical modeling.",
+      "image": "data/images/python libraries for datascience_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/lO7oTnNmPYb"
+    },
+    
+    {
+      "id":15 ,
+      "title" : "Data Science",
+      "issuer": "Simplilearn|Skillup",
+      "date": "September 2023",
+      "description": "Gained a beginner-friendly understanding of what data science is, how it works, and where it’s applied in real-world decision-making.",
+      "image": "data/images/what is datascience_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/gYdmw3XmPYb"
+    },
+    
+    {
+      "id":16 ,
+      "title" : "Data Analytics",
+      "issuer": "Simplilearn|Skillup",
+      "date": "September 2023",
+      "description": "Explored the essentials of data analytics, including how data is collected, processed, and interpreted to support insights.",
+      "image": "data/images/data analytics_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/Md81Rz3mPYb"
+    },
+    
+    {
+      "id":17 ,
+      "title" : "Tableau Training",
+      "issuer": "Simplilearn|Skillup",
+      "date": "October 2023",
+      "description": "Learned to create dashboards and visual stories in Tableau, turning raw data into clear, interactive visualizations.",
+      "image": "data/images/Tablaeu_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/TjKsfK4mPYb"
+    },
+    
+    {
+      "id":18 ,
+      "title" : "Business Intelligence using Excel",
+      "issuer": "Simplilearn|Skillup",
+      "date": "June 2024"         ,
+      "description": "Built practical BI skills in Excel, using formulas, charts, and basic analysis tools to organize data and highlight key trends.",
+      "image": "data/images/Excell_page1.png",
+      "icon": "microsoft",
+        "link": "https://simpli-web.app.link/e/5R2BwpanPYb"
+    },
+    
+    {
+      "id":19 ,
+      "title" : "SQL and Relational Databases",
+      "issuer": "IBM",
+      "date": "July 2024",
+      "description": "Gained a solid introduction to SQL and relational databases, learning how to query, structure, and manage data using core SQL commands and relational design principles.",
+      "image": "data/images/IBM DB0101EN Certificate _ Cognitive Class SQL_page1.png",
+      "icon": "microsoft",
+        "link": "https://cognitiveclass.ai/certificate_thumbnails/course/6b8710dac7fc4a61b32bad686e086728"
+    },
+    
+    {
+      "id":20,
+      "title" : "Data Analysis with Python",
+      "issuer": "IBM",
+      "date": "June 2024",
+      "description": "Developed practical skills in analyzing data with Python, working with Pandas, NumPy, and visualization tools to explore datasets and extract meaningful insights.",
+      "image": "data/images/IBM DA0101EN Certificate _ Cognitive Class_page1.png",
+      "icon": "microsoft",
+        "link": "https://cognitiveclass.ai/certificate_thumbnails/course/d5bc20673ef54d9fa96b76ac66ccf4ca"
+    }
+  
   ]
 }
