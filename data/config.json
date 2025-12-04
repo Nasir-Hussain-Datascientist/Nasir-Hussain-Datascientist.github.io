@@ -2,8 +2,8 @@
   "profile": {
     "name": "Nasir Hussain",
     "title": "Data Scientist & Analyst",
-    "profileImage": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/IMG_431222.JPG?raw=true",
-    "coverImage": "https://github.com/Nasir-Hussain-Datascientist/images/blob/main/IMG_431222.JPG?raw=true",
+    "profileImage": "data/images/dp.JPG",
+    "coverImage": "data/images/cover.jpg",
     "introTitle": "Data Scientist & Analyst",
     "introDescription": "Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization to drive business decisions.",
     "aboutDescription": "With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets. My expertise includes machine learning, statistical modeling, data visualization, and predictive analytics.",
