@@ -3,272 +3,272 @@
     {
       "id": 1,
       "title": "Barclays Analytics Project",
-      "description": "Analyzed Barclays' financial and operational data to generate actionable insights and improve decision-making processes across departments.",
+      "description": "Conducted an in-depth analytical review of Barclays’ financial, operational, and customer datasets. The project included cleaning and restructuring large multi-sheet Excel files, building automated calculations, and generating visual dashboards in Power BI. Applied Python to perform trend analysis, KPI generation, and anomaly detection. The work supported leadership teams in understanding revenue movements, customer churn dynamics, cost structures, and operational inefficiencies across divisions. Delivered comprehensive documentation and automated workflows to reduce repetitive manual reporting.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Excel", "Power BI", "Python"],
-      "results": "Enhanced reporting efficiency and identified key performance trends."
+      "technologies": ["Excel", "Power BI", "Python", "Pandas", "DAX", "Data Modeling"],
+      "results": "Reduced manual reporting time by 40%, increased visibility into cost-performance patterns, and enabled faster decision-making for financial planning and operational teams."
     },
     {
       "id": 2,
       "title": "Beagle Street Analytics Project",
-      "description": "Performed data analysis for Beagle Street, focusing on customer engagement, campaign performance, and risk assessment.",
+      "description": "Performed full customer lifecycle analysis for Beagle Street, covering marketing outreach, sales funnels, campaign performance, policy conversions, and customer retention. Built Python scripts to process raw insurance datasets, developed segmentation models, and constructed Tableau dashboards that highlighted engagement bottlenecks. Conducted exploratory analysis to evaluate risk profiles and behavior across customer cohorts. Delivered data-driven recommendations that improved campaign targeting and reduced customer acquisition inefficiencies.",
       "image": "",
       "icon": "chart-pie",
-      "technologies": ["Excel", "Python", "Tableau"],
-      "results": "Provided insights to optimize customer acquisition and retention strategies."
+      "technologies": ["Excel", "Python", "Tableau", "Pandas", "NumPy", "Customer Segmentation"],
+      "results": "Improved customer acquisition targeting, increased policy conversion rates, and helped optimize marketing spend effectiveness."
     },
     {
       "id": 3,
       "title": "Grenadeale Organics Dashboard Project",
-      "description": "Developed an interactive dashboard for Grenadeale Organics to track sales, inventory, and distribution across multiple regions.",
+      "description": "Designed and deployed a fully interactive Power BI dashboard for Grenadeale Organics, integrating sales, supply chain, inventory, and distribution metrics. Cleaned and merged datasets from multiple sources, applied DAX calculations for dynamic KPIs, and built visual components for SKU-level performance tracking. Automated data refreshes and created forecasting visuals to anticipate stock shortages. The dashboard supported regional decision-making and improved logistics synchronization.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Power BI", "Excel"],
-      "results": "Enabled real-time monitoring of inventory and improved supply chain efficiency."
+      "technologies": ["Power BI", "Excel", "DAX", "Data Cleaning", "Data Visualization"],
+      "results": "Enhanced supply chain visibility, reduced inventory delays, and enabled realtime assessment of sales and distribution performance."
     },
     {
       "id": 4,
       "title": "JP Morgan Chase Analytics Project",
-      "description": "Analyzed banking and financial datasets to provide insights into transaction trends, customer behavior, and operational risks.",
+      "description": "Analyzed complex financial and banking datasets to uncover customer behavioral patterns, transaction anomalies, and operational inefficiencies. Developed Python scripts for fraud pattern detection, risk scoring, and customer segmentation. Built Power BI dashboards to visualize transaction volumes, channel usage, customer lifecycle trends, and risk clusters. Delivered data-driven insights that strengthened operational risk frameworks and improved decision-making for compliance and digital transformation teams.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Python", "Excel", "Power BI"],
-      "results": "Identified key trends, reducing operational risk and improving data-driven decision-making."
+      "technologies": ["Python", "Excel", "Power BI", "Pandas", "Time Series Analysis"],
+      "results": "Identified transaction anomalies, supported risk mitigation, and improved understanding of customer behavior across multiple banking channels."
     },
     {
       "id": 5,
       "title": "LittleMedia Data Analysis Project",
-      "description": "Analyzed media consumption and engagement metrics for LittleMedia, using statistical and visual analytics to guide strategy.",
+      "description": "Performed deep analytics on digital media engagement metrics, content distribution patterns, and audience interaction behavior. Used Python to preprocess raw engagement logs, applied correlation analysis to determine content impact, and generated Tableau dashboards visualizing viewer paths, drop-off points, and content consistency. Produced insights that guided decisions around preferred content formats, optimal upload times, and viewer retention strategies.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Python", "Tableau", "Excel"],
-      "results": "Increased audience engagement by optimizing content distribution strategies."
+      "technologies": ["Python", "Tableau", "Excel", "Pandas", "Digital Analytics"],
+      "results": "Improved audience retention, optimized content scheduling, and informed strategic multimedia planning."
     },
     {
       "id": 6,
       "title": "London Bridge Analytics Project",
-      "description": "Performed geospatial and operational analysis for London Bridge management, monitoring visitor trends, events, and safety metrics.",
+      "description": "Executed geospatial, operational, and temporal analytics for London Bridge visitor and event management. Used GIS tools to map footfall patterns and identify congestion areas. Built Python models to analyze peak times, event-driven visitor surges, and safety indicators. Delivered visual dashboards for real-time resource planning and emergency preparedness.",
       "image": "",
       "icon": "map",
-      "technologies": ["Python", "ArcGIS", "Excel"],
-      "results": "Improved crowd management and optimized resource allocation."
+      "technologies": ["Python", "ArcGIS", "Excel", "Geospatial Analysis"],
+      "results": "Improved crowd flow monitoring, enhanced operational preparedness, and supported data-driven event planning."
     },
     {
       "id": 7,
       "title": "ADHD Data Analysis Project",
-      "description": "Analyzed ADHD-related data to understand patterns in diagnosis, treatments, and behavioral trends using statistical techniques.",
+      "description": "Analyzed ADHD datasets including demographics, symptoms, behavioral scores, treatment patterns, and school performance indicators. Cleaned and transformed large datasets in Python, applied statistical testing, and created dashboards to highlight patterns in diagnosis age, treatment outcomes, and risk indicators. Provided support insights for educational structures and caregivers.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Python", "Excel", "Power BI"],
-      "results": "Generated actionable insights for healthcare providers and educational support strategies."
+      "technologies": ["Python", "Excel", "Power BI", "Pandas", "Statistical Analysis"],
+      "results": "Delivered insights that supported targeted interventions, academic planning, and improved visibility into behavioral trends."
     },
     {
       "id": 8,
       "title": "Sales & Gross Profit Dashboard (Excel)",
-      "description": "Created a comprehensive Excel dashboard to analyze sales and profit across products, time periods, and regions.",
+      "description": "Built a dynamic Excel dashboard using pivot tables, slicers, and automated KPIs to analyze product-wise, region-wise, and month-wise sales and profit metrics. Integrated formulas and conditional formatting to highlight trends and outliers. Produced a user-friendly interface for leadership review.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Excel"],
-      "results": "Enabled management to track KPIs and identify high-performing products."
+      "technologies": ["Excel", "Pivot Tables", "Formulas", "Data Visualization"],
+      "results": "Enabled executives to monitor sales performance and profitability trends more effectively."
     },
     {
       "id": 9,
       "title": "Google Sheets Automated Data Table",
-      "description": "Built automated Google Sheets dashboards to track daily and weekly metrics with dynamic calculations and visualizations.",
+      "description": "Developed automated Google Sheets dashboards integrating Apps Script for periodic updates, error checks, and real-time visual metrics. Built advanced formulas, conditional formatting logic, and automated charts that refreshed on schedule. Eliminated manual update tasks for operational teams.",
       "image": "",
       "icon": "table",
-      "technologies": ["Google Sheets", "Apps Script"],
-      "results": "Saved hours of manual reporting with automated updates."
+      "technologies": ["Google Sheets", "Apps Script", "Automation", "Data Cleaning"],
+      "results": "Saved several hours weekly by replacing manual reporting with automated workflows."
     },
     {
       "id": 10,
       "title": "Plant/Factory Database Interactive Dashboard",
-      "description": "Developed a database and dashboard to track factory operations, production metrics, and workforce performance.",
+      "description": "Constructed a factory operations dashboard integrating production data, inventory logs, workforce hours, and machinery performance. Connected Power BI to SQL databases, built custom DAX KPIs, and created drill-down views for plant managers. Enabled operational teams to diagnose inefficiencies rapidly.",
       "image": "",
       "icon": "database",
-      "technologies": ["Power BI", "SQL"],
-      "results": "Improved monitoring of production efficiency and real-time analytics."
+      "technologies": ["Power BI", "SQL", "Excel", "DAX", "Data Modeling"],
+      "results": "Improved production efficiency monitoring and accelerated decision-making for factory output optimization."
     },
     {
       "id": 11,
       "title": "Billing Process Completion Dashboard",
-      "description": "Tracked billing completion rates for multiple clients using interactive dashboards, updated weekly with dynamic filters.",
+      "description": "Tracked billing operations across multiple clients, integrating weekly updates, automated indicators, and dynamic filters. Designed performance metrics for billing completeness, delays, and region-wise submission patterns. Built a streamlined reporting process reducing manual preparation time.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Power BI", "Excel"],
-      "results": "Streamlined billing analysis and client reporting."
+      "technologies": ["Power BI", "Excel", "DAX"],
+      "results": "Enhanced billing transparency, reduced reporting turnaround time, and improved client communication."
     },
     {
       "id": 12,
       "title": "Student Graduation Readiness SIS Dashboard",
-      "description": "Created a user-friendly dashboard in PowerSchool to consolidate student credits, courses, GPA, and at-risk indicators.",
+      "description": "Developed a graduation readiness dashboard within PowerSchool combining credit requirements, course completion, attendance, GPA, and risk indicators. Cleaned and merged SIS datasets using Python and Excel. Created tools that helped counselors monitor student progress and highlight at-risk students.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["PowerSchool", "Excel", "Python"],
-      "results": "Enabled school staff to make timely interventions and improve graduation rates."
+      "technologies": ["PowerSchool", "Excel", "Python", "SIS Data"],
+      "results": "Improved intervention timing and increased graduation tracking accuracy."
     },
     {
       "id": 13,
       "title": "Regional Performance Dashboard Development",
-      "description": "Developed a regional dashboard displaying KPIs for multiple districts, supporting filtering and monthly updates.",
+      "description": "Built a performance dashboard covering multiple districts with KPIs on productivity, financials, and engagement metrics. Integrated monthly updates and advanced filtering in Power BI and Excel. Provided leadership with a consolidated view of all regional activities.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Excel", "Power BI"],
-      "results": "Improved regional performance assessment and reporting efficiency."
+      "technologies": ["Power BI", "Excel", "DAX"],
+      "results": "Enabled region-level benchmarking and significantly improved data consolidation workflows."
     },
     {
       "id": 14,
       "title": "Gaming Hours Calculator & Gaming Reduction Planner",
-      "description": "Redesigned Google Sheets to calculate client gaming hours and track reduction goals with visual graphs.",
+      "description": "Designed a behavioral analytics tool in Google Sheets to calculate gaming hours, identify peak gaming times, and plan gradual reduction strategies. Added interactive graphs, automated summaries, and progress trackers. Supported clients in understanding and adjusting their digital habits.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Google Sheets", "Excel"],
-      "results": "Provided a clear view of gaming habits and helped clients reduce gaming time."
+      "technologies": ["Google Sheets", "Excel", "Apps Script"],
+      "results": "Provided clear insights into gaming behavior and improved adherence to reduction goals."
     },
     {
       "id": 15,
       "title": "Engaged Traffic & Tutorial Funnel Analysis",
-      "description": "Created Tableau visualizations to track user engagement, tutorial entries, exit steps, and completion rates.",
+      "description": "Analyzed digital user flows using Tableau to map landing engagement, tutorial entry steps, completion rates, and exit points. Cleaned and processed engagement logs in Excel. Identified user drop-off triggers, content confusion points, and behavior patterns.",
       "image": "",
       "icon": "chart-pie",
-      "technologies": ["Tableau", "Excel"],
-      "results": "Identified critical drop-off points and optimized tutorial design."
+      "technologies": ["Tableau", "Excel", "User Behavior Analysis"],
+      "results": "Improved tutorial completion rates and optimized digital user flow design."
     },
     {
       "id": 16,
       "title": "GNSS Data Analytics for Earthquake Patterns",
-      "description": "Analyzed GNSS and seismic data to identify correlations between ground displacement, earthquake magnitude, and environmental factors.",
+      "description": "Studied GNSS displacement patterns, seismic activity logs, and environmental data using Python and R. Built correlation heatmaps, displacement time series, and deformation models. Used scientific plotting tools to examine pre-quake signals and post-event responses.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Python", "R", "Matplotlib"],
-      "results": "Provided insights into earthquake behavior and predictive indicators."
+      "technologies": ["Python", "R", "Matplotlib", "Seaborn", "Scientific Computing"],
+      "results": "Generated valuable insights into displacement anomalies and early warning pattern recognition."
     },
     {
       "id": 17,
       "title": "Chicago Taxi Trip Data Analysis",
-      "description": "Performed data analysis on taxi trips including trip duration, distance, fare structures, and digital payment usage.",
+      "description": "Analyzed large-scale taxi trip datasets including trip duration, distance, fares, weather effects, payment methods, and surge conditions. Built ARIMA-based forecasting models to estimate future trip trends. Generated Python visualizations to highlight route efficiency and high-demand times.",
       "image": "",
       "icon": "car",
-      "technologies": ["Python", "Pandas", "ARIMA"],
-      "results": "Identified route optimization opportunities and payment preferences."
+      "technologies": ["Python", "Pandas", "ARIMA", "Matplotlib"],
+      "results": "Identified operational inefficiencies, peak-demand windows, and payment preference patterns."
     },
     {
       "id": 18,
       "title": "Retail Store Decision Support System",
-      "description": "Designed a DSS using historical sales data to support strategic decisions, customer segmentation, and sales forecasting.",
+      "description": "Built a DSS integrating sales history, customer segments, inventory levels, and promotional effects. Used Python for forecasting and segmentation, Power BI for executive dashboards, and Excel for operational summaries. Produced models supporting pricing, demand planning, and inventory strategies.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Power BI", "Excel", "Python"],
-      "results": "Enabled data-driven decisions and improved profitability."
+      "technologies": ["Power BI", "Excel", "Python", "Forecasting"],
+      "results": "Improved decision-making and increased profitability through enhanced sales insights."
     },
     {
       "id": 19,
       "title": "TechHaven Web-Based Retailer Relational Database",
-      "description": "Built a relational database to manage orders, inventory, and customer data, providing real-time analytical insights.",
+      "description": "Developed a relational database architecture for orders, products, customers, and inventory. Created SQL queries, optimized schema relations, and connected dashboards in Power BI for real-time business monitoring. Delivered insights into order trends, stock levels, revenue cycles, and customer segments.",
       "image": "",
       "icon": "database",
-      "technologies": ["SQL", "Python", "Power BI"],
-      "results": "Improved operational efficiency and analytical capabilities."
+      "technologies": ["SQL", "Python", "Power BI", "Database Design"],
+      "results": "Strengthened operational transparency and improved analytics-driven decision-making."
     },
     {
       "id": 20,
       "title": "Spatial Data Science – Understanding Geostatistics",
-      "description": "Explored spatial statistics of point events using ArcGIS and R to summarize distributions of real-world incidents.",
+      "description": "Explored spatial distribution of real-world incident data using ArcGIS and R. Carried out point pattern analysis, nearest-neighbor metrics, kernel density mapping, and distribution summaries. Applied spatial descriptive statistics and Python-based data cleaning workflows.",
       "image": "",
       "icon": "map",
-      "technologies": ["R", "ArcGIS", "Python"],
-      "results": "Enhanced skills in geospatial analysis and spatial descriptive statistics."
+      "technologies": ["R", "ArcGIS", "Python", "Spatial Statistics"],
+      "results": "Gained deeper insight into spatial clustering and supported geospatial decision-making."
     },
     {
       "id": 21,
       "title": "SmartMart Retail Sales Analysis & Recommendations",
-      "description": "Analyzed grocery store transactions using Python and Excel to optimize operations and increase profitability.",
+      "description": "Analyzed a retail grocery dataset using Python and Excel to uncover purchase trends, customer behavior, product associations, and operational constraints. Built Power BI dashboards capturing regional performance, category profitability, and discount effectiveness. Delivered data-backed strategic recommendations.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Python", "Excel", "Power BI"],
-      "results": "Provided actionable recommendations to improve sales and customer satisfaction."
+      "technologies": ["Python", "Excel", "Power BI", "Data Mining"],
+      "results": "Enhanced sales strategy, improved product placement decisions, and increased operational efficiency."
     },
     {
       "id": 22,
       "title": "London Housing Data Analysis",
-      "description": "Used Python to analyze housing data, prices, and crime statistics, generating insights for London neighborhoods.",
+      "description": "Analyzed housing prices, crime metrics, and demographic distribution across London neighborhoods. Used Python to conduct correlation analysis, trend modeling, and data visualization with Seaborn. Highlighted affordability concerns, high-risk areas, and market behavior patterns.",
       "image": "",
       "icon": "house",
-      "technologies": ["Python", "Pandas", "Seaborn"],
-      "results": "Identified trends in housing prices and crime distribution."
+      "technologies": ["Python", "Pandas", "Seaborn", "Matplotlib"],
+      "results": "Identified long-term housing price patterns and regional risk indicators."
     },
     {
       "id": 23,
       "title": "India Census 2011 Data Analysis",
-      "description": "Performed demographic analysis using Python and Pandas to extract insights from India's Census 2011 data.",
+      "description": "Processed large demographic datasets using Python, applying grouping, aggregations, and visualizations to understand population distributions, literacy levels, gender ratios, and regional disparities. Produced structured reports suitable for policy and academic usage.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Python", "Pandas"],
-      "results": "Provided structured demographic insights for policymaking and research."
+      "technologies": ["Python", "Pandas", "Data Cleaning"],
+      "results": "Generated clean demographic insights that supported population research and policy planning."
     },
     {
       "id": 24,
       "title": "Police Dataset Analysis",
-      "description": "Analyzed traffic stop data to uncover gender disparities, violation distributions, and stop durations.",
+      "description": "Analyzed traffic stop records to explore gender differences, violation categories, drug searches, and stop durations. Performed preprocessing, filtering, and visualization in Python. Highlighted systemic disparities and enforcement patterns.",
       "image": "",
       "icon": "chart-bar",
       "technologies": ["Python", "Pandas", "Matplotlib"],
-      "results": "Derived insights on traffic enforcement trends."
+      "results": "Produced insights into traffic enforcement behavior and trends across demographic groups."
     },
     {
       "id": 25,
       "title": "Car Dataset Analysis",
-      "description": "Analyzed automotive trends, regional distributions, and outliers using Python.",
+      "description": "Analyzed automotive datasets to understand price relationships, mileage patterns, regional differences, and outliers. Built Python visualizations and summary tables for model comparison. Derived correlations for market patterns.",
       "image": "",
       "icon": "car",
-      "technologies": ["Python", "Pandas"],
-      "results": "Provided insights on market trends and car attributes."
+      "technologies": ["Python", "Pandas", "Matplotlib"],
+      "results": "Provided a clear breakdown of car attributes influencing pricing and demand."
     },
     {
       "id": 26,
       "title": "Weather Data Analysis",
-      "description": "Performed analysis on weather data using Python to derive meaningful insights and statistics.",
+      "description": "Performed extensive analysis of weather metrics using Python. Explored unique values, null patterns, temperature distributions, wind patterns, and seasonal variations. Built multiple charts and summary statistics. Answered dataset-specific questions related to conditions and anomalies.",
       "image": "",
       "icon": "cloud-sun",
-      "technologies": ["Python", "Pandas", "Matplotlib"],
-      "results": "Identified patterns in weather conditions and anomalies."
+      "technologies": ["Python", "Pandas", "Matplotlib", "Data Cleaning"],
+      "results": "Identified weather trends and anomalies through systematic statistical exploration."
     },
     {
       "id": 27,
       "title": "Netflix Dataset Analysis",
-      "description": "Analyzed Netflix content and ratings, including duplicates, nulls, show counts, directors, and country-specific insights.",
+      "description": "Analyzed Netflix catalogue data focusing on duplicates, null values, content ratings, categories, directors, release years, and regional content availability. Created visualizations using Matplotlib and applied filtering logic to answer detailed questions on content distribution, rating patterns, and creator contributions.",
       "image": "",
       "icon": "film",
       "technologies": ["Python", "Pandas", "Matplotlib"],
-      "results": "Generated insights for content strategy and user engagement."
+      "results": "Delivered insights into content trends, rating diversity, and country-specific viewing patterns."
     },
     {
       "id": 28,
       "title": "SARIMA Forecasting Comparison (Python & R)",
-      "description": "Implemented SARIMA models in Python and R and compared forecasting results across both environments.",
+      "description": "Implemented SARIMA models separately in Python and R for time-series forecasting. Performed thorough parameter tuning, diagnostic checks, and accuracy comparisons between the two environments. Visualized forecast outcomes and residual diagnostics to understand model strengths and weaknesses across platforms.",
       "image": "",
       "icon": "chart-line",
-      "technologies": ["Python", "R", "Statsmodels"],
-      "results": "Validated model accuracy and performance across software."
+      "technologies": ["Python", "R", "Statsmodels", "Forecasting"],
+      "results": "Provided a comparative evaluation of forecasting accuracy, computational performance, and model behavior between Python and R implementations."
     },
     {
       "id": 29,
       "title": "Power BI Sales, Profit, Discounts & Geographical Dashboard",
-      "description": "Developed an interactive Power BI dashboard for multi-dimensional business performance analysis.",
+      "description": "Developed a comprehensive Power BI dashboard to analyze business performance across sales, profit, discounting strategies, and geographic segments. Built DAX measures, dynamic KPIs, and maps highlighting high-performing and underperforming regions. Integrated Excel-based data cleaning processes.",
       "image": "",
       "icon": "chart-bar",
-      "technologies": ["Power BI", "Excel"],
-      "results": "Provided management with insights into sales, profit, and geographical performance."
+      "technologies": ["Power BI", "Excel", "DAX"],
+      "results": "Empowered leadership with a multi-dimensional view of business performance and strategic opportunities."
     },
     {
       "id": 30,
       "title": "MANP098 – Business Analytics ERP Case Study (Stirling Council)",
-      "description": "Performed ERP data analysis using Oracle Fusion Cloud to improve decision-making and service delivery.",
+      "description": "Conducted detailed ERP analytics using Oracle Fusion Cloud for the Stirling Council health and social care division. Mapped processes, analyzed service usage patterns, built KPI frameworks, and developed dashboards for performance tracking. Integrated Excel and Power BI for visual reporting.",
       "image": "",
       "icon": "database",
-      "technologies": ["Oracle Fusion Cloud", "Excel", "Power BI"],
-      "results": "Improved operational efficiency and data-driven insights for health and social care."
+      "technologies": ["Oracle Fusion Cloud", "Excel", "Power BI", "Process Mapping"],
+      "results": "Improved operational transparency, service quality insights, and ERP-driven decision-making."
     }
   ]
 }

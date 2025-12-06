@@ -7,8 +7,8 @@ function createStars() {
         const star = document.createElement('div');
         star.className = 'star';
         
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
+        const left = Math.random() * 1000;
+        const top = Math.random() * 1000;
         const size = Math.random() * 3;
         const delay = Math.random() * 5;
         
