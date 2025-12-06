@@ -1,7 +1,7 @@
 // Create stars for galaxy background
 function createStars() {
     const starsContainer = document.getElementById('stars');
-    const starsCount = 2000;
+    const starsCount = 500;
     
     for (let i = 0; i < starsCount; i++) {
         const star = document.createElement('div');
@@ -251,11 +251,11 @@ class PortfolioCMS {
             </div>
             <div class="info-item">
                 <span>Location:</span>
-                <span>San Francisco, CA</span>
+                <span>Swat, Pakistan </span>
             </div>
             <div class="info-item">
                 <span>Degree:</span>
-                <span>MSc Data Science</span>
+                <span>BS-Software Engineering \n Gold Medalist </span>
             </div>
         `;
     }
