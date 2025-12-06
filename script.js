@@ -8,7 +8,7 @@ function createStars() {
         star.className = 'star';
         
         const left = Math.random() * 1000;
-        const top = Math.random() * 1000;
+        const top = Math.random() * 100;
         const size = Math.random() * 3;
         const delay = Math.random() * 5;
         
@@ -710,11 +710,131 @@ class PortfolioCMS {
         });
 
         // Contact form
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! In a real implementation, this would send an email.');
-            e.target.reset();
+            // Contact Form Handling with Formspree
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    
+    // If contact form doesn't exist, exit
+    if (!contactForm) return;
+    
+    // Get button text elements
+    const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+    const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+    
+    // Check for success parameter in URL (after form submission)
+    function checkForSuccessMessage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hash = window.location.hash;
+        
+        // If we're on contact section with success parameter
+        if (hash === '#contact' && urlParams.get('success') === 'true') {
+            // Show success message
+            if (contactForm && successMessage) {
+                contactForm.style.display = 'none';
+                successMessage.style.display = 'block';
+            }
+            
+            // Remove success parameter from URL without reloading
+            const newUrl = window.location.pathname + '#contact';
+            window.history.replaceState({}, document.title, newUrl);
+            
+            // Auto-hide success message after 10 seconds
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    if (contactForm) contactForm.style.display = 'block';
+                }, 10000);
+            }
+        }
+    }
+    
+    // Check on page load
+    checkForSuccessMessage();
+    
+    // Also check when hash changes (if user clicks contact link)
+    window.addEventListener('hashchange', checkForSuccessMessage);
+    
+    // Form submission handler
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        if (submitBtn && btnText && btnLoader) {
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-block';
+            submitBtn.disabled = true;
+        }
+        
+        try {
+            // Submit form data to Formspree
+            const formData = new FormData(this);
+            
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Form submitted successfully
+                const nextInput = this.querySelector('input[name="_next"]');
+                if (nextInput) {
+                    // Redirect to success page
+                    window.location.href = nextInput.value;
+                } else {
+                    // Fallback if _next is not defined
+                    if (contactForm && successMessage) {
+                        contactForm.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        this.reset();
+                    }
+                    // Reset button state
+                    if (submitBtn && btnText && btnLoader) {
+                        btnText.style.display = 'inline-block';
+                        btnLoader.style.display = 'none';
+                        submitBtn.disabled = false;
+                    }
+                }
+            } else {
+                // Form submission failed
+                throw new Error('Form submission failed');
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            
+            // Show error message with fallback to your email
+            alert('Sorry, there was an error sending your message. Please email me directly at nasir.swat.hussain@gmail.com');
+            
+            // Reset button state
+            if (submitBtn && btnText && btnLoader) {
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }
+    });
+    
+    // Optional: Add form validation feedback
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value.trim() === '' && this.hasAttribute('required')) {
+                this.classList.add('invalid');
+            } else {
+                this.classList.remove('invalid');
+            }
         });
+        
+        input.addEventListener('input', function() {
+            this.classList.remove('invalid');
+        });
+    });
+});
 
         // Admin forms
         this.setupAdminForms();
