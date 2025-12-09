@@ -91,6 +91,44 @@
             <!-- Projects Section -->
             <section id="projects" class="section">
                 <h2>My Projects</h2>
+                <!-- Add this in your projects section, right after <h2>My Projects</h2> -->
+<div class="category-filter">
+    <div class="category-tabs">
+        <button class="tab-btn active" data-category="all">
+            <i class="fas fa-globe"></i> All Projects
+            <span class="project-count" id="allCount">36</span>
+        </button>
+        <button class="tab-btn" data-category="Data Science">
+            <i class="fas fa-chart-line"></i> Data Science
+            <span class="project-count" id="dsCount">14</span>
+        </button>
+        <button class="tab-btn" data-category="Machine Learning">
+            <i class="fas fa-robot"></i> Machine Learning
+            <span class="project-count" id="mlCount">4</span>
+        </button>
+        <button class="tab-btn" data-category="Analytics">
+            <i class="fas fa-chart-bar"></i> Analytics
+            <span class="project-count" id="analyticsCount">5</span>
+        </button>
+        <button class="tab-btn" data-category="Data Engineering">
+            <i class="fas fa-database"></i> Data Engineering
+            <span class="project-count" id="deCount">4</span>
+        </button>
+        <button class="tab-btn" data-category="Visualization/Reporting">
+            <i class="fas fa-tv"></i> Visualization
+            <span class="project-count" id="vizCount">9</span>
+        </button>
+    </div>
+    
+    <!-- Category stats (optional) -->
+    <div class="category-stats">
+        <p>Showing <span id="showingCount">36</span> of 36 projects</p>
+    </div>
+</div>
+
+<div class="projects-grid" id="projectsGrid">
+    <!-- Projects will be loaded here by JavaScript -->
+</div>
                 <div class="projects-grid" id="projectsGrid">
                     <div class="loading">Loading projects...</div>
                 </div>
