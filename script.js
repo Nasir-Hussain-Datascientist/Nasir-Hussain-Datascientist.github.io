@@ -36,6 +36,8 @@ class PortfolioCMS {
             skills: [],
             reviews: []
         };
+        this.filteredProjects = [];
+        this.currentCategory = 'all';
         this.basePath = window.location.hostname === 'localhost' ? './data' : './data';
         this.init();
     }
@@ -46,6 +48,7 @@ class PortfolioCMS {
         this.renderAll();
         this.setupEventListeners();
         this.setupNavigation();
+        this.setupCategoryFilter();
     }
 
     // 🚀 PERMANENT STORAGE - Load from JSON files
@@ -76,6 +79,7 @@ class PortfolioCMS {
             // projects.json
             if (responses[1].status === 'fulfilled') {
                 this.data.projects = responses[1].value.projects || [];
+                this.filteredProjects = [...this.data.projects];
             }
 
             // services.json
@@ -117,14 +121,14 @@ class PortfolioCMS {
         
         this.data = {
             profile: {
-                name: "Alex Johnson",
+                name: "Nasir Hussain",
                 title: "Data Scientist & Analyst",
                 profileImage: "",
                 coverImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
                 introTitle: "Data Scientist & Analyst",
                 introDescription: "Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization.",
                 aboutDescription: "With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets.",
-                contactEmail: "alex.johnson@example.com",
+                contactEmail: "nasir.swat.hussain@gmail.com",
                 resumeLink: "#"
             },
             projects: [
@@ -135,7 +139,8 @@ class PortfolioCMS {
                     image: "",
                     icon: "chart-line",
                     technologies: ["Python", "Scikit-learn", "Tableau"],
-                    results: "Increased conversion rates by 15%"
+                    results: "Increased conversion rates by 15%",
+                    category: "Machine Learning"
                 }
             ],
             services: [
@@ -201,6 +206,8 @@ class PortfolioCMS {
                 }
             ]
         };
+        
+        this.filteredProjects = [...this.data.projects];
     }
 
     // 🎯 RENDER METHODS
@@ -246,11 +253,11 @@ class PortfolioCMS {
             </div>
             <div class="info-item">
                 <span>Location:</span>
-                <span>Swat, Pakistan </span>
+                <span>Swat, Pakistan</span>
             </div>
             <div class="info-item">
                 <span>Degree:</span>
-                <span>BS-Software Engineering \n Gold Medalist </span>
+                <span>BS-Software Engineering<br>Gold Medalist</span>
             </div>
         `;
     }
@@ -264,13 +271,43 @@ class PortfolioCMS {
             return;
         }
 
-        grid.innerHTML = this.data.projects.map(project => `
-            <div class="project-card">
+        // Initialize filtered projects
+        this.filteredProjects = [...this.data.projects];
+        this.currentCategory = 'all';
+        
+        // Render initial projects
+        this.renderFilteredProjects();
+        
+        // Update category counts
+        this.updateCategoryCounts();
+    }
+
+    renderFilteredProjects() {
+        const grid = document.getElementById('projectsGrid');
+        const showingCount = document.getElementById('showingCount');
+        
+        // Update showing count
+        showingCount.textContent = this.filteredProjects.length;
+
+        if (this.filteredProjects.length === 0) {
+            grid.innerHTML = `
+                <div class="no-projects" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--galaxy-purple);">No projects found</h3>
+                    <p style="color: var(--text-muted);">Try selecting a different category</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = this.filteredProjects.map(project => `
+            <div class="project-card" data-category="${project.category}">
                 <div class="project-img">
                     ${project.image ? 
                         `<img src="${project.image}" alt="${project.title}">` :
                         `<i class="fas fa-${project.icon || 'project-diagram'}"></i>`
                     }
+                    <span class="category-badge">${project.category}</span>
                 </div>
                 <div class="project-content">
                     <h3>${project.title}</h3>
@@ -278,6 +315,84 @@ class PortfolioCMS {
                 </div>
             </div>
         `).join('');
+
+        // Re-attach project modal events
+        this.setupProjectModal();
+    }
+
+    updateCategoryCounts() {
+        // Count projects per category
+        const counts = {
+            'all': this.data.projects.length,
+            'Data Science': 0,
+            'Machine Learning': 0,
+            'Analytics': 0,
+            'Data Engineering': 0,
+            'Visualization/Reporting': 0
+        };
+        
+        this.data.projects.forEach(project => {
+            if (counts.hasOwnProperty(project.category)) {
+                counts[project.category]++;
+            }
+        });
+        
+        // Update count displays
+        document.getElementById('allCount').textContent = counts.all;
+        document.getElementById('dsCount').textContent = counts['Data Science'];
+        document.getElementById('mlCount').textContent = counts['Machine Learning'];
+        document.getElementById('analyticsCount').textContent = counts['Analytics'];
+        document.getElementById('deCount').textContent = counts['Data Engineering'];
+        document.getElementById('vizCount').textContent = counts['Visualization/Reporting'];
+    }
+
+    filterProjectsByCategory(category) {
+        this.currentCategory = category;
+        
+        if (category === 'all') {
+            this.filteredProjects = [...this.data.projects];
+        } else {
+            this.filteredProjects = this.data.projects.filter(
+                project => project.category === category
+            );
+        }
+        
+        this.renderFilteredProjects();
+    }
+
+    setupCategoryFilter() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                
+                // Filter projects
+                this.filterProjectsByCategory(category);
+                
+                // Update active state
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Smooth scroll to projects section if not already visible
+                if (!this.isElementInViewport(document.getElementById('projects'))) {
+                    document.getElementById('projects').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+
+    isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
     }
 
     renderCertifications() {
@@ -351,7 +466,6 @@ class PortfolioCMS {
                 </div>
             `).join('');
 
-        // Setup blog buttons after rendering
         this.setupBlogButtons();
     }
 
@@ -598,19 +712,28 @@ class PortfolioCMS {
         });
 
         // Close modal
-        document.getElementById('closeProjectModal').addEventListener('click', () => {
-            document.getElementById('projectModal').style.display = 'none';
-        });
+        const closeModalBtn = document.getElementById('closeProjectModal');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                document.getElementById('projectModal').style.display = 'none';
+            });
+        }
 
         // Close when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('projectModal')) {
-                document.getElementById('projectModal').style.display = 'none';
-            }
-        });
+        const projectModal = document.getElementById('projectModal');
+        if (projectModal) {
+            window.addEventListener('click', (e) => {
+                if (e.target === projectModal) {
+                    projectModal.style.display = 'none';
+                }
+            });
+        }
     }
 
     showProjectDetails(project) {
+        const modal = document.getElementById('projectModal');
+        if (!modal) return;
+
         document.getElementById('modalProjectTitle').textContent = project.title;
         document.getElementById('modalProjectContent').innerHTML = `
             <div class="project-img" style="margin-bottom: 2rem;">
@@ -650,7 +773,7 @@ class PortfolioCMS {
                 </a>
             </div>` : ''}
         `;
-        document.getElementById('projectModal').style.display = 'block';
+        modal.style.display = 'block';
     }
 
     addReview(reviewData) {
