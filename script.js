@@ -36,6 +36,7 @@ class PortfolioCMS {
             skills: [],
             reviews: []
         };
+        this.categories = [];
         this.filteredProjects = [];
         this.currentCategory = 'all';
         this.basePath = window.location.hostname === 'localhost' ? './data' : './data';
@@ -44,11 +45,31 @@ class PortfolioCMS {
 
     async init() {
         createStars();
+        await this.loadCategories();
         await this.loadAllData();
         this.renderAll();
         this.setupEventListeners();
         this.setupNavigation();
         this.setupCategoryFilter();
+    }
+
+    // 🚀 Load categories from JSON
+    async loadCategories() {
+        try {
+            const response = await fetch(`${this.basePath}/categories.json`);
+            const data = await response.json();
+            this.categories = data.categories || [];
+            console.log('✅ Categories loaded:', this.categories);
+        } catch (error) {
+            console.error('Error loading categories:', error);
+            this.categories = [
+                "Data Science",
+                "Machine Learning", 
+                "Analytics",
+                "Data Engineering",
+                "Visualization/Reporting"
+            ];
+        }
     }
 
     // 🚀 PERMANENT STORAGE - Load from JSON files
@@ -126,8 +147,8 @@ class PortfolioCMS {
                 profileImage: "",
                 coverImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
                 introTitle: "Data Scientist & Analyst",
-                introDescription: "Transforming complex data into actionable insights. Specializing in machine learning, statistical analysis, and data visualization.",
-                aboutDescription: "With over 5 years of experience in data science and analytics, I specialize in extracting meaningful insights from complex datasets.",
+                introDescription: "Transforming complex data into actionable insights.",
+                aboutDescription: "With over 5 years of experience in data science and analytics.",
                 contactEmail: "nasir.swat.hussain@gmail.com",
                 resumeLink: "#"
             },
@@ -135,12 +156,12 @@ class PortfolioCMS {
                 {
                     id: 1,
                     title: "Customer Segmentation",
-                    description: "Used clustering algorithms to segment customers based on purchasing behavior.",
+                    description: "Used clustering algorithms to segment customers.",
+                    category: "Machine Learning",
                     image: "",
                     icon: "chart-line",
                     technologies: ["Python", "Scikit-learn", "Tableau"],
-                    results: "Increased conversion rates by 15%",
-                    category: "Machine Learning"
+                    results: "Increased conversion rates by 15%"
                 }
             ],
             services: [
@@ -156,7 +177,7 @@ class PortfolioCMS {
                     id: 1,
                     title: "The Future of AI in Healthcare",
                     description: "Exploring how AI is transforming healthcare industry.",
-                    fullContent: "<h3>Complete Blog Article</h3><p>This is the full content of the blog article. You can add detailed explanations, multiple paragraphs, and rich content here.</p><p>To update this content, edit the 'fullContent' field in your blogs.json file.</p>",
+                    fullContent: "<h3>Complete Blog Article</h3><p>This is where your full blog article would appear.</p>",
                     image: "",
                     icon: "chart-pie",
                     date: "June 10, 2023",
@@ -213,6 +234,7 @@ class PortfolioCMS {
     // 🎯 RENDER METHODS
     renderAll() {
         this.renderProfile();
+        this.renderCategoryTabs();
         this.renderProjects();
         this.renderServices();
         this.renderBlogs();
@@ -262,39 +284,71 @@ class PortfolioCMS {
         `;
     }
 
+    renderCategoryTabs() {
+        const tabsContainer = document.getElementById('categoryTabs');
+        if (!tabsContainer) return;
+
+        // Update total count
+        const totalCount = this.data.projects.length;
+        document.getElementById('totalCount').textContent = totalCount;
+
+        // Create All tab
+        let tabsHTML = `
+            <button class="tab-btn active" data-category="all">
+                <i class="fas fa-globe"></i> All Projects
+                <span class="project-count" id="allCount">${totalCount}</span>
+            </button>
+        `;
+
+        // Create category tabs
+        this.categories.forEach(category => {
+            const count = this.data.projects.filter(p => p.category === category).length;
+            const categoryId = category.toLowerCase().replace(/\s+/g, '-');
+            
+            tabsHTML += `
+                <button class="tab-btn" data-category="${category}">
+                    <i class="fas fa-${this.getCategoryIcon(category)}"></i> ${category}
+                    <span class="project-count" id="${categoryId}Count">${count}</span>
+                </button>
+            `;
+        });
+
+        tabsContainer.innerHTML = tabsHTML;
+    }
+
+    getCategoryIcon(category) {
+        const iconMap = {
+            'Data Science': 'chart-line',
+            'Machine Learning': 'robot',
+            'Analytics': 'chart-bar',
+            'Data Engineering': 'database',
+            'Visualization/Reporting': 'tv',
+            'Web Development': 'code',
+            'Desktop Applications': 'desktop',
+            'Consulting': 'handshake'
+        };
+        return iconMap[category] || 'folder';
+    }
+
     renderProjects() {
-        const grid = document.getElementById('projectsGrid');
-        if (!grid) return;
-
-        if (this.data.projects.length === 0) {
-            grid.innerHTML = '<div class="loading">No projects yet.</div>';
-            return;
-        }
-
-        // Initialize filtered projects
         this.filteredProjects = [...this.data.projects];
-        this.currentCategory = 'all';
-        
-        // Render initial projects
         this.renderFilteredProjects();
-        
-        // Update category counts
-        this.updateCategoryCounts();
     }
 
     renderFilteredProjects() {
         const grid = document.getElementById('projectsGrid');
         const showingCount = document.getElementById('showingCount');
         
-        // Update showing count
+        if (!grid || !showingCount) return;
+
         showingCount.textContent = this.filteredProjects.length;
 
         if (this.filteredProjects.length === 0) {
             grid.innerHTML = `
-                <div class="no-projects" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                    <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
-                    <h3 style="color: var(--galaxy-purple);">No projects found</h3>
-                    <p style="color: var(--text-muted);">Try selecting a different category</p>
+                <div class="no-projects">
+                    <i class="fas fa-search"></i>
+                    <h3>No projects found</h3>
+                    <p>Try selecting a different category</p>
                 </div>
             `;
             return;
@@ -316,34 +370,26 @@ class PortfolioCMS {
             </div>
         `).join('');
 
-        // Re-attach project modal events
         this.setupProjectModal();
     }
 
-    updateCategoryCounts() {
-        // Count projects per category
-        const counts = {
-            'all': this.data.projects.length,
-            'Data Science': 0,
-            'Machine Learning': 0,
-            'Analytics': 0,
-            'Data Engineering': 0,
-            'Visualization/Reporting': 0
-        };
-        
-        this.data.projects.forEach(project => {
-            if (counts.hasOwnProperty(project.category)) {
-                counts[project.category]++;
-            }
+    setupCategoryFilter() {
+        const tabsContainer = document.getElementById('categoryTabs');
+        if (!tabsContainer) return;
+
+        tabsContainer.addEventListener('click', (e) => {
+            const tabBtn = e.target.closest('.tab-btn');
+            if (!tabBtn) return;
+
+            const category = tabBtn.getAttribute('data-category');
+            this.filterProjectsByCategory(category);
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            tabBtn.classList.add('active');
         });
-        
-        // Update count displays
-        document.getElementById('allCount').textContent = counts.all;
-        document.getElementById('dsCount').textContent = counts['Data Science'];
-        document.getElementById('mlCount').textContent = counts['Machine Learning'];
-        document.getElementById('analyticsCount').textContent = counts['Analytics'];
-        document.getElementById('deCount').textContent = counts['Data Engineering'];
-        document.getElementById('vizCount').textContent = counts['Visualization/Reporting'];
     }
 
     filterProjectsByCategory(category) {
@@ -358,41 +404,6 @@ class PortfolioCMS {
         }
         
         this.renderFilteredProjects();
-    }
-
-    setupCategoryFilter() {
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const category = button.getAttribute('data-category');
-                
-                // Filter projects
-                this.filterProjectsByCategory(category);
-                
-                // Update active state
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Smooth scroll to projects section if not already visible
-                if (!this.isElementInViewport(document.getElementById('projects'))) {
-                    document.getElementById('projects').scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    }
-
-    isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
     }
 
     renderCertifications() {
@@ -537,7 +548,7 @@ class PortfolioCMS {
                     <h3 style="color: var(--galaxy-purple); margin-bottom: 1.5rem; font-size: 1.5rem;">Full Article</h3>
                     <div style="color: var(--text-color); line-height: 1.8; font-size: 1.1rem;">
                         ${blog.fullContent || 
-                            `<p>This is where your full blog article would appear. To add full content, update your <code>blogs.json</code> file and add a "fullContent" field with your complete article text.</p>`
+                            `<p>This is where your full blog article would appear. To add full content, update your <code>blogs.json</code> file.</p>`
                         }
                     </div>
                 </div>
