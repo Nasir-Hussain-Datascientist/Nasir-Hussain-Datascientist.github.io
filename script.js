@@ -36,8 +36,6 @@ class PortfolioCMS {
             skills: [],
             reviews: []
         };
-        this.adminPassword = "admin123";
-        this.isAdmin = false;
         this.basePath = window.location.hostname === 'localhost' ? './data' : './data';
         this.init();
     }
@@ -214,8 +212,6 @@ class PortfolioCMS {
         this.renderCertifications();
         this.renderResume();
         this.renderReviews();
-        this.renderAdminLists();
-        this.populateAdminForms();
     }
 
     renderProfile() {
@@ -226,7 +222,6 @@ class PortfolioCMS {
         document.getElementById('introTitle').textContent = profile.introTitle || 'Welcome';
         document.getElementById('introDescription').textContent = profile.introDescription || 'Your introduction';
         document.getElementById('aboutDescription').textContent = profile.aboutDescription || 'About you';
-        // Note: Removed contactEmail rendering from here - it's now in HTML
         document.getElementById('resumeDownloadLink').href = profile.resumeLink || '#';
 
         const profileImg = document.getElementById('profileImage');
@@ -264,23 +259,25 @@ class PortfolioCMS {
         const grid = document.getElementById('projectsGrid');
         if (!grid) return;
 
-        grid.innerHTML = this.data.projects.length === 0 ? 
-            '<div class="loading">No projects yet. Add some in the admin panel!</div>' :
-            this.data.projects.map(project => `
-                <div class="project-card">
-                    <div class="project-img">
-                        ${project.image ? 
-                            `<img src="${project.image}" alt="${project.title}">` :
-                            `<i class="fas fa-${project.icon}"></i>`
-                        }
-                    </div>
-                    <div class="project-content">
-                        <h3>${project.title}</h3>
-                        <p>${project.description}</p>
-                        <button class="btn open-project" data-project="${project.id}">View Details</button>
-                    </div>
+        if (this.data.projects.length === 0) {
+            grid.innerHTML = '<div class="loading">No projects yet.</div>';
+            return;
+        }
+
+        grid.innerHTML = this.data.projects.map(project => `
+            <div class="project-card">
+                <div class="project-img">
+                    ${project.image ? 
+                        `<img src="${project.image}" alt="${project.title}">` :
+                        `<i class="fas fa-${project.icon || 'project-diagram'}"></i>`
+                    }
                 </div>
-            `).join('');
+                <div class="project-content">
+                    <h3>${project.title}</h3>
+                    <button class="btn open-project" data-project="${project.id}">View Details</button>
+                </div>
+            </div>
+        `).join('');
     }
 
     renderCertifications() {
@@ -288,20 +285,19 @@ class PortfolioCMS {
         if (!grid) return;
 
         grid.innerHTML = this.data.certifications.length === 0 ?
-            '<div class="loading">No certifications yet. Add some in the admin panel!</div>' :
+            '<div class="loading">No certifications yet.</div>' :
             this.data.certifications.map(cert => `
                 <div class="certification-card">
                     <div class="certification-img">
                         ${cert.image ?
                             `<img src="${cert.image}" alt="${cert.title}">` :
-                            `<i class="fas fa-${cert.icon}"></i>`
+                            `<i class="fas fa-${cert.icon || 'certificate'}"></i>`
                         }
                     </div>
                     <div class="certification-content">
                         <h3>${cert.title}</h3>
                         <p><strong>Issuer:</strong> ${cert.issuer}</p>
                         <p><strong>Date:</strong> ${cert.date}</p>
-                        <p>${cert.description}</p>
                         <button class="btn" onclick="window.open('${cert.link || '#'}', '_blank'); return false;">View Certificate</button>
                     </div>
                 </div>
@@ -313,7 +309,7 @@ class PortfolioCMS {
         if (!grid) return;
 
         grid.innerHTML = this.data.services.length === 0 ?
-            '<div class="loading">No services yet. Add some in the admin panel!</div>' :
+            '<div class="loading">No services yet.</div>' :
             this.data.services.map(service => `
                 <div class="service-card">
                     <div class="service-icon">
@@ -330,13 +326,13 @@ class PortfolioCMS {
         if (!grid) return;
 
         grid.innerHTML = this.data.blogs.length === 0 ?
-            '<div class="loading">No blogs yet. Add some in the admin panel!</div>' :
+            '<div class="loading">No blogs yet.</div>' :
             this.data.blogs.map(blog => `
                 <div class="blog-card">
                     <div class="blog-img">
                         ${blog.image ?
                             `<img src="${blog.image}" alt="${blog.title}">` :
-                            `<i class="fas fa-${blog.icon}"></i>`
+                            `<i class="fas fa-${blog.icon || 'blog'}"></i>`
                         }
                     </div>
                     <div class="blog-content">
@@ -374,11 +370,9 @@ class PortfolioCMS {
     }
 
     showBlogDetail(blog) {
-        // Create or show blog detail modal
         let blogModal = document.getElementById('blogDetailModal');
         
         if (!blogModal) {
-            // Create modal if it doesn't exist
             blogModal = document.createElement('div');
             blogModal.id = 'blogDetailModal';
             blogModal.className = 'modal';
@@ -390,12 +384,10 @@ class PortfolioCMS {
             `;
             document.body.appendChild(blogModal);
             
-            // Add close event
             document.getElementById('closeBlogDetailModal').addEventListener('click', () => {
                 blogModal.style.display = 'none';
             });
             
-            // Close when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === blogModal) {
                     blogModal.style.display = 'none';
@@ -403,7 +395,6 @@ class PortfolioCMS {
             });
         }
         
-        // Populate blog content
         document.getElementById('blogDetailContent').innerHTML = `
             <div class="blog-detail-header" style="text-align: center; margin-bottom: 2.5rem;">
                 <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--galaxy-purple);">${blog.title}</h2>
@@ -432,10 +423,7 @@ class PortfolioCMS {
                     <h3 style="color: var(--galaxy-purple); margin-bottom: 1.5rem; font-size: 1.5rem;">Full Article</h3>
                     <div style="color: var(--text-color); line-height: 1.8; font-size: 1.1rem;">
                         ${blog.fullContent || 
-                            `<p>This is where your full blog article would appear. To add full content, update your <code>blogs.json</code> file and add a "fullContent" field with your complete article text.</p>
-                             <p>Example in JSON:</p>
-                             <pre style="background: var(--dark-bg); padding: 1rem; border-radius: 8px; overflow-x: auto;">
-"fullContent": "Your complete blog article here with paragraphs, images, and detailed explanations..."</pre>`
+                            `<p>This is where your full blog article would appear. To add full content, update your <code>blogs.json</code> file and add a "fullContent" field with your complete article text.</p>`
                         }
                     </div>
                 </div>
@@ -448,7 +436,6 @@ class PortfolioCMS {
             </div>
         `;
         
-        // Show the modal
         blogModal.style.display = 'block';
     }
 
@@ -523,105 +510,6 @@ class PortfolioCMS {
             `).join('');
     }
 
-    renderAdminLists() {
-        if (!this.isAdmin) return;
-        // Admin list rendering would go here
-    }
-
-    // 🎛️ ADMIN FUNCTIONALITY
-    populateAdminForms() {
-        const profile = this.data.profile;
-        document.getElementById('adminProfileName').value = profile.name || '';
-        document.getElementById('adminProfileTitle').value = profile.title || '';
-        document.getElementById('adminProfileImage').value = profile.profileImage || '';
-        document.getElementById('adminCoverImage').value = profile.coverImage || '';
-        document.getElementById('adminIntroTitle').value = profile.introTitle || '';
-        document.getElementById('adminIntroDescription').value = profile.introDescription || '';
-        document.getElementById('adminAboutDescription').value = profile.aboutDescription || '';
-        document.getElementById('adminContactEmail').value = profile.contactEmail || '';
-        document.getElementById('adminResumeLink').value = profile.resumeLink || '';
-    }
-
-    // ➕ CRUD OPERATIONS
-    addProject(projectData) {
-        const newProject = {
-            id: this.data.projects.length > 0 ? Math.max(...this.data.projects.map(p => p.id)) + 1 : 1,
-            ...projectData
-        };
-        this.data.projects.push(newProject);
-        this.renderProjects();
-    }
-
-    addCertification(certData) {
-        const newCert = {
-            id: this.data.certifications.length > 0 ? Math.max(...this.data.certifications.map(c => c.id)) + 1 : 1,
-            ...certData
-        };
-        this.data.certifications.push(newCert);
-        this.renderCertifications();
-    }
-
-    addService(serviceData) {
-        const newService = {
-            id: this.data.services.length > 0 ? Math.max(...this.data.services.map(s => s.id)) + 1 : 1,
-            ...serviceData
-        };
-        this.data.services.push(newService);
-        this.renderServices();
-    }
-
-    addBlog(blogData) {
-        const newBlog = {
-            id: this.data.blogs.length > 0 ? Math.max(...this.data.blogs.map(b => b.id)) + 1 : 1,
-            fullContent: blogData.fullContent || '',
-            ...blogData
-        };
-        this.data.blogs.push(newBlog);
-        this.renderBlogs();
-    }
-
-    addEducation(eduData) {
-        const newEdu = {
-            id: this.data.education.length > 0 ? Math.max(...this.data.education.map(e => e.id)) + 1 : 1,
-            ...eduData
-        };
-        this.data.education.push(newEdu);
-        this.renderEducation();
-    }
-
-    addExperience(expData) {
-        const newExp = {
-            id: this.data.experience.length > 0 ? Math.max(...this.data.experience.map(e => e.id)) + 1 : 1,
-            ...expData
-        };
-        this.data.experience.push(newExp);
-        this.renderExperience();
-    }
-
-    addSkill(skillData) {
-        const newSkill = {
-            id: this.data.skills.length > 0 ? Math.max(...this.data.skills.map(s => s.id)) + 1 : 1,
-            ...skillData
-        };
-        this.data.skills.push(newSkill);
-        this.renderSkills();
-    }
-
-    addReview(reviewData) {
-        const newReview = {
-            id: this.data.reviews.length > 0 ? Math.max(...this.data.reviews.map(r => r.id)) + 1 : 1,
-            ...reviewData,
-            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-        };
-        this.data.reviews.unshift(newReview);
-        this.renderReviews();
-    }
-
-    updateProfile(profileData) {
-        this.data.profile = { ...this.data.profile, ...profileData };
-        this.renderProfile();
-    }
-
     // 🔄 NAVIGATION
     setupNavigation() {
         const initialHash = window.location.hash.substring(1);
@@ -669,32 +557,11 @@ class PortfolioCMS {
                 const sectionId = navLink.getAttribute('data-section');
                 window.location.hash = sectionId;
             }
-
-            const adminTab = e.target.closest('.admin-tab');
-            if (adminTab) {
-                e.preventDefault();
-                const tabName = adminTab.getAttribute('data-tab');
-                this.switchAdminTab(tabName);
-            }
         });
 
         // Mobile menu
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('active');
-        });
-
-        // Admin login
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            const password = document.getElementById('adminPassword').value;
-            if (password === this.adminPassword) {
-                this.isAdmin = true;
-                document.getElementById('adminLogin').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                this.renderAdminLists();
-                alert('Admin access granted!');
-            } else {
-                alert('Incorrect password!');
-            }
         });
 
         // Review form
@@ -709,17 +576,93 @@ class PortfolioCMS {
             }
         });
 
-        // Admin forms
-        this.setupAdminForms();
+        // Setup project modal functionality
+        this.setupProjectModal();
 
-        // Modal functionality
-        this.setupModals();
-
-        // Contact form - NOW ADDED CORRECTLY
+        // Contact form
         this.setupContactForm();
     }
 
-    // ✨ NEW: Contact Form Handler
+    setupProjectModal() {
+        // Event delegation for project buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('open-project') || e.target.closest('.open-project')) {
+                const button = e.target.classList.contains('open-project') ? e.target : e.target.closest('.open-project');
+                const projectId = parseInt(button.getAttribute('data-project'));
+                const project = this.data.projects.find(p => p.id === projectId);
+                
+                if (project) {
+                    this.showProjectDetails(project);
+                }
+            }
+        });
+
+        // Close modal
+        document.getElementById('closeProjectModal').addEventListener('click', () => {
+            document.getElementById('projectModal').style.display = 'none';
+        });
+
+        // Close when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('projectModal')) {
+                document.getElementById('projectModal').style.display = 'none';
+            }
+        });
+    }
+
+    showProjectDetails(project) {
+        document.getElementById('modalProjectTitle').textContent = project.title;
+        document.getElementById('modalProjectContent').innerHTML = `
+            <div class="project-img" style="margin-bottom: 2rem;">
+                ${project.image ? 
+                    `<img src="${project.image}" alt="${project.title}">` :
+                    `<i class="fas fa-${project.icon || 'project-diagram'}" style="font-size: 5rem;"></i>`
+                }
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--galaxy-purple); margin-bottom: 1rem;">Project Description</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-color);">${project.description}</p>
+            </div>
+            
+            ${project.technologies && project.technologies.length > 0 ? `
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--galaxy-purple); margin-bottom: 1rem;">Technologies Used</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    ${project.technologies.map(tech => `
+                        <span style="background: var(--darker-bg); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--border-color); color: var(--text-muted);">
+                            ${tech}
+                        </span>
+                    `).join('')}
+                </div>
+            </div>` : ''}
+            
+            ${project.results ? `
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--galaxy-purple); margin-bottom: 1rem;">Results & Achievements</h3>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-color);">${project.results}</p>
+            </div>` : ''}
+            
+            ${project.link ? `
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="${project.link}" target="_blank" class="btn">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
+            </div>` : ''}
+        `;
+        document.getElementById('projectModal').style.display = 'block';
+    }
+
+    addReview(reviewData) {
+        const newReview = {
+            id: this.data.reviews.length > 0 ? Math.max(...this.data.reviews.map(r => r.id)) + 1 : 1,
+            ...reviewData,
+            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        };
+        this.data.reviews.unshift(newReview);
+        this.renderReviews();
+    }
+
     setupContactForm() {
         const contactForm = document.getElementById('contactForm');
         if (!contactForm) return;
@@ -729,7 +672,6 @@ class PortfolioCMS {
         
         if (!submitBtn || !successMessage) return;
 
-        // Get button text elements
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoader = submitBtn.querySelector('.btn-loader');
         
@@ -748,7 +690,6 @@ class PortfolioCMS {
             submitBtn.disabled = true;
             
             try {
-                // Submit form data to Formspree
                 const formData = new FormData(contactForm);
                 
                 const response = await fetch(contactForm.action, {
@@ -760,34 +701,27 @@ class PortfolioCMS {
                 });
                 
                 if (response.ok) {
-                    // Form submitted successfully
                     const nextInput = contactForm.querySelector('input[name="_next"]');
                     if (nextInput && nextInput.value) {
-                        // Redirect to success page
                         window.location.href = nextInput.value;
                     } else {
-                        // Fallback if _next is not defined
                         contactForm.style.display = 'none';
                         successMessage.style.display = 'block';
                         contactForm.reset();
                         
-                        // Reset button state
                         btnText.style.display = 'inline-block';
                         btnLoader.style.display = 'none';
                         submitBtn.disabled = false;
                     }
                 } else {
-                    // Form submission failed
                     throw new Error('Form submission failed');
                 }
                 
             } catch (error) {
                 console.error('Form submission error:', error);
                 
-                // Show error message with fallback to your email
                 alert('Sorry, there was an error sending your message. Please email me directly at nasir.swat.hussain@gmail.com');
                 
-                // Reset button state
                 btnText.style.display = 'inline-block';
                 btnLoader.style.display = 'none';
                 submitBtn.disabled = false;
@@ -815,19 +749,15 @@ class PortfolioCMS {
         const urlParams = new URLSearchParams(window.location.search);
         const hash = window.location.hash;
         
-        // If we're on contact section with success parameter
         if (hash === '#contact' && urlParams.get('success') === 'true') {
-            // Show success message
             if (contactForm && successMessage) {
                 contactForm.style.display = 'none';
                 successMessage.style.display = 'block';
             }
             
-            // Remove success parameter from URL without reloading
             const newUrl = window.location.pathname + '#contact';
             window.history.replaceState({}, document.title, newUrl);
             
-            // Auto-hide success message after 10 seconds
             if (successMessage) {
                 setTimeout(() => {
                     successMessage.style.display = 'none';
@@ -835,212 +765,6 @@ class PortfolioCMS {
                 }, 10000);
             }
         }
-    }
-
-    setupAdminForms() {
-        // Profile form
-        document.getElementById('updateProfileForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.updateProfile({
-                name: document.getElementById('adminProfileName').value,
-                title: document.getElementById('adminProfileTitle').value,
-                profileImage: document.getElementById('adminProfileImage').value,
-                coverImage: document.getElementById('adminCoverImage').value,
-                introTitle: document.getElementById('adminIntroTitle').value,
-                introDescription: document.getElementById('adminIntroDescription').value,
-                aboutDescription: document.getElementById('adminAboutDescription').value,
-                contactEmail: document.getElementById('adminContactEmail').value,
-                resumeLink: document.getElementById('adminResumeLink').value
-            });
-            alert('Profile updated! Remember to save to GitHub to make changes permanent.');
-        });
-
-        // Project form
-        document.getElementById('addProjectForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addProject({
-                title: document.getElementById('projectTitle').value,
-                description: document.getElementById('projectDescription').value,
-                image: document.getElementById('projectImage').value,
-                icon: document.getElementById('projectIcon').value.replace('fas fa-', ''),
-                technologies: document.getElementById('projectTechnologies').value.split(',').map(t => t.trim()),
-                results: document.getElementById('projectResults').value
-            });
-            e.target.reset();
-            alert('Project added! Remember to save to GitHub.');
-        });
-
-        // Certification form
-        document.getElementById('addCertificationForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addCertification({
-                title: document.getElementById('certificationTitle').value,
-                issuer: document.getElementById('certificationIssuer').value,
-                date: document.getElementById('certificationDate').value,
-                description: document.getElementById('certificationDescription').value,
-                image: document.getElementById('certificationImage').value,
-                icon: document.getElementById('certificationIcon').value.replace('fas fa-', '')
-            });
-            e.target.reset();
-            alert('Certification added! Remember to save to GitHub.');
-        });
-
-        // Service form
-        document.getElementById('addServiceForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addService({
-                title: document.getElementById('serviceTitle').value,
-                description: document.getElementById('serviceDescription').value,
-                icon: document.getElementById('serviceIcon').value.replace('fas fa-', '')
-            });
-            e.target.reset();
-            alert('Service added! Remember to save to GitHub.');
-        });
-
-        // Blog form
-        document.getElementById('addBlogForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addBlog({
-                title: document.getElementById('blogTitle').value,
-                description: document.getElementById('blogDescription').value,
-                fullContent: document.getElementById('blogFullContent') ? document.getElementById('blogFullContent').value : '',
-                date: document.getElementById('blogDate').value,
-                category: document.getElementById('blogCategory').value,
-                image: document.getElementById('blogImage').value,
-                icon: document.getElementById('blogIcon').value.replace('fas fa-', '')
-            });
-            e.target.reset();
-            alert('Blog added! Remember to save to GitHub.');
-        });
-
-        // Education form
-        document.getElementById('addEducationForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addEducation({
-                degree: document.getElementById('educationDegree').value,
-                institution: document.getElementById('educationInstitution').value,
-                period: document.getElementById('educationPeriod').value
-            });
-            e.target.reset();
-            alert('Education added! Remember to save to GitHub.');
-        });
-
-        // Experience form
-        document.getElementById('addExperienceForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addExperience({
-                position: document.getElementById('experiencePosition').value,
-                company: document.getElementById('experienceCompany').value,
-                period: document.getElementById('experiencePeriod').value
-            });
-            e.target.reset();
-            alert('Experience added! Remember to save to GitHub.');
-        });
-
-        // Skills form
-        document.getElementById('addSkillForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.addSkill({
-                category: document.getElementById('skillCategory').value,
-                items: document.getElementById('skillItems').value.split(',').map(s => s.trim())
-            });
-            e.target.reset();
-            alert('Skills added! Remember to save to GitHub.');
-        });
-
-        // GitHub sync buttons
-        document.getElementById('loadFromGitHub').addEventListener('click', async () => {
-            await this.loadAllData();
-            this.renderAll();
-            alert('Data reloaded from GitHub!');
-        });
-
-        document.getElementById('saveAllToGitHub').addEventListener('click', () => {
-            this.showGitHubInstructions();
-        });
-    }
-
-    setupModals() {
-        // Project modals
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('open-project') || e.target.closest('.open-project')) {
-                const button = e.target.classList.contains('open-project') ? e.target : e.target.closest('.open-project');
-                const projectId = parseInt(button.getAttribute('data-project'));
-                const project = this.data.projects.find(p => p.id === projectId);
-                
-                if (project) {
-                    document.getElementById('modalProjectTitle').textContent = project.title;
-                    document.getElementById('modalProjectContent').innerHTML = `
-                        <div class="project-img" style="margin-bottom: 1.5rem;">
-                            ${project.image ? 
-                                `<img src="${project.image}" alt="${project.title}">` :
-                                `<i class="fas fa-${project.icon}"></i>`
-                            }
-                        </div>
-                        <p><strong>Description:</strong> ${project.description}</p>
-                        <h4 style="margin-top: 1.5rem;">Technologies Used:</h4>
-                        <ul>
-                            ${project.technologies.map(tech => `<li>${tech}</li>`).join('')}
-                        </ul>
-                        <h4 style="margin-top: 1.5rem;">Results:</h4>
-                        <p>${project.results}</p>
-                    `;
-                    document.getElementById('projectModal').style.display = 'block';
-                }
-            }
-        });
-
-        // Close modals
-        document.getElementById('closeProjectModal').addEventListener('click', () => {
-            document.getElementById('projectModal').style.display = 'none';
-        });
-
-        document.getElementById('closeCertificationModal').addEventListener('click', () => {
-            document.getElementById('certificationModal').style.display = 'none';
-        });
-
-        document.getElementById('closeBlogModal').addEventListener('click', () => {
-            document.getElementById('blogModal').style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('projectModal')) {
-                document.getElementById('projectModal').style.display = 'none';
-            }
-        });
-    }
-
-    switchAdminTab(tabName) {
-        document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.admin-form').forEach(form => form.classList.remove('active'));
-        
-        const activeTab = document.querySelector(`[data-tab="${tabName}"]`);
-        const activeForm = document.getElementById(`${tabName}Form`);
-        
-        if (activeTab && activeForm) {
-            activeTab.classList.add('active');
-            activeForm.classList.add('active');
-        }
-    }
-
-    showGitHubInstructions() {
-        alert(`🚀 HOW TO SAVE DATA PERMANENTLY:
-
-Since we can't automatically write to GitHub Pages from the browser, here's how to save your data:
-
-1. Go to your GitHub repository
-2. Navigate to the 'data' folder
-3. Update these JSON files with your current data:
-
-config.json - Profile & settings
-projects.json - Your projects  
-certifications.json - Certifications
-blogs.json - Blog posts
-services.json - Services
-resume.json - Education/Experience/Skills
-reviews.json - Client reviews
-
-Your data is currently stored in memory. Copy it from the admin forms and update the JSON files in your GitHub repo to make it permanent!`);
     }
 }
 
