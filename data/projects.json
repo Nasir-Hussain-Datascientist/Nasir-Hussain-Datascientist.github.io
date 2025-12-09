@@ -8,7 +8,7 @@
       "icon": "chart-line",
       "technologies": ["SQL", "Python", "pandas", "NumPy", "XGBoost", "Power BI", "Machine Learning"],
       "results": "25% reduction in ATM cash shortages, 15% less cash held in low-traffic ATMs, 20% lower cash delivery costs, improved customer experience",
-      "category": "Consulting"
+      "category": "Machine Learning"
     },
     {
       "id": 2,
