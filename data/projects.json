@@ -359,6 +359,16 @@
       "technologies": ["R Programming", "Python", "SARIMA", "Time Series", "Forecasting"],
       "results": "SARIMA implementation comparison, time series analysis insights",
       "category": "Data Science"
-    }
+    },
+    {
+  "id": 37,
+  "title": "My Portfolio Website",
+  "description": "Developed a personal portfolio website to showcase data science projects. Built with vanilla JavaScript, features dynamic filtering, responsive design, and JSON-based content management.",
+  "image": "",
+  "icon": "globe",
+  "technologies": ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+  "results": "Successfully created and deployed a professional portfolio that effectively showcases projects and skills to potential clients/employers.",
+  "category": "Web Development"
+}
   ]
 }
