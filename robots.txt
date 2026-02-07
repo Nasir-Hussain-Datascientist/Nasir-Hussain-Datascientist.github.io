@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://Nasir-Hussain-Datascientist.github.io/sitemap.xml
